@@ -16,17 +16,71 @@ class GenericRouterTest extends TestCase
      * @test
      * @throws ContainerException
      */
-    public function testRouter()
+    public function testRouterBasicRoute()
     {
         $router = $this->container->get(Router::class);
 
         $response = $router->dispatch(new HttpRequest(
-            method: Method::GET,
-            uri: '/home')
+                method: Method::GET,
+                uri: '/home')
         );
 
         $this->assertSame($router::class, GenericRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
         $this->assertSame("Hello World!", $response->getBody());
     }
+
+    /**
+     * @test
+     * @throws ContainerException
+     */
+    public function testRouterWithMissingRoute()
+    {
+        $router = $this->container->get(Router::class);
+
+        $response = $router->dispatch(new HttpRequest(
+                method: Method::GET,
+                uri: '/this/does/not/exist')
+        );
+
+        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame(Status::HTTP_404, $response->getStatus());
+    }
+
+    /**
+     * @test
+     * @throws ContainerException
+     */
+    public function testRouterWithParams()
+    {
+        $router = $this->container->get(Router::class);
+
+        $response = $router->dispatch(new HttpRequest(
+                method: Method::GET,
+                uri: '/greet/freddy')
+        );
+
+        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame(Status::HTTP_200, $response->getStatus());
+        $this->assertSame("Hello freddy!", $response->getBody());
+    }
+
+    /**
+     * @test
+     * @throws ContainerException
+     */
+    public function testRouterWithMultipleParams()
+    {
+        $router = $this->container->get(Router::class);
+
+        $response = $router->dispatch(new HttpRequest(
+                method: Method::GET,
+                uri: '/greet/freddy/with/mug')
+        );
+
+        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame(Status::HTTP_200, $response->getStatus());
+        $this->assertSame("Hello freddy, heres a mug!", $response->getBody());
+    }
+
 }

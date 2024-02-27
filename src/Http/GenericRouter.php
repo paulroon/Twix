@@ -37,22 +37,49 @@ final class GenericRouter implements Router
                     continue;
                 }
 
-                if ($route->uri !== $request->getUri()) {
+                $params = $this->resolveParams($route->uri, $request->getUri());
+
+                if (count($params) < 1 && $route->uri !== $request->getUri()) {
                     continue;
                 }
 
                 $controller = $this->container->get($controllerClass);
-                return $controller->{$method->getName()}();
+                return $controller->{$method->getName()}(...$params);
             }
         }
 
         return new HttpResponse(Status::HTTP_404, "NOT FOUND");
     }
 
-
-
-    public function getRouterConfig(): RouterConfig
+    private function resolveParams(string $routeUri, string $requestUri): array
     {
-        return $this->routerConfig;
+        $result = preg_match_all('/\{\w+}/', $routeUri, $tokens);
+
+        if (!$result) {
+            return [];
+        }
+        $tokens = $tokens[0];
+
+        $matchingRegExp = '/^' . str_replace(
+            ['/', ...$tokens],
+            ['\\/', ...array_fill(0, count($tokens), '([\w\d\s]+)')],
+            $routeUri
+        ) . '$/';
+
+        $result = preg_match_all($matchingRegExp, $requestUri, $matches);
+
+        if ($result === 0) {
+            return [];
+        }
+        unset($matches[0]);
+
+        $matches = array_values($matches);
+
+        $params = [];
+        foreach ($matches as $i => $match) {
+            $params[trim($tokens[$i], '{}')] = $match[0];
+        }
+
+        return $params;
     }
 }
