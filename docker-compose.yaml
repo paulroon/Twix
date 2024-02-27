@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+
+  web:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
+  app:
+    build:
+      dockerfile: docker/php/Dockerfile
+    container_name: app-php
+    volumes:
+      - ./public:/www/public
+      - ./app:/www/app
+      - ./src:/www/src
+      - ./tests:/www/tests
+      - ./composer.json:/www/composer.json
+      - ./phpunit.xml:/www/phpunit.xml

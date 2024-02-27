@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Twix\\tests\\ThingerTest::testThinger":5},"times":{"Twix\\tests\\ThingerTest::testThinger":0.001,"Twix\\Test\\Container\\GenericContainerTest::testSingleton":0.006}}
