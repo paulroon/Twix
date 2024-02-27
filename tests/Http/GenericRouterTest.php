@@ -22,7 +22,7 @@ class GenericRouterTest extends TestCase
 
         $response = $router->dispatch(new HttpRequest(
                 method: Method::GET,
-                uri: '/home')
+                uri: '/')
         );
 
         $this->assertSame($router::class, GenericRouter::class);

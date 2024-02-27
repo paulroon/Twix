@@ -2,6 +2,8 @@
 #
 up: docker-compose-down docker-compose-up
 down: docker-compose-down
+clean: docker-cleanup
+kill: docker-compose-down docker-cleanup
 logs: docker-compose-logs
 cu: composer-update
 ci: composer-install
@@ -19,6 +21,9 @@ docker-compose-down:
 docker-compose-logs:
 	@echo "====================      Docker Compose [Logs]      ====================="
 	docker compose logs -f
+docker-cleanup:
+	@echo "====================      Docker Cleanup      ====================="
+	docker image prune -af
 composer-update:
 	@echo "====================      Composer UPDATE      ====================="
 	docker exec -it app-php composer update

@@ -15,5 +15,6 @@ RUN composer install --prefer-dist --no-scripts --no-progress --no-interaction
 COPY ../../app ./app
 COPY ../../src ./src
 COPY ../../tests ./tests
+COPY ../../.env.example ./.env
 
 RUN composer dump-autoload --optimize

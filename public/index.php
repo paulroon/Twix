@@ -1,9 +1,16 @@
 <?php
 
+use Twix\Twix;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-//Twix::boot(__DIR__ . '/../')->http()->run();
+$twix = Twix::boot(__DIR__ . '/../');
 
-echo sprintf("HERE!!!! - Hello! [%s]", time());
+$httpApp = $twix->http();
+
+//    $router = $twix->getContainer()->get(\Twix\Interfaces\Router::class);
+//    dd($router->listControllers());
+
+$httpApp->run();
 
 exit;

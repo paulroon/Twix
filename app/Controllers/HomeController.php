@@ -9,7 +9,7 @@ use Twix\Interfaces\Response;
 
 final readonly class HomeController
 {
-    #[Get('/home')]
+    #[Get('/')]
     public function index(): Response
     {
         return new HttpResponse(Status::HTTP_200, "Hello World!");

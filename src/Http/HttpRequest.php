@@ -9,7 +9,8 @@ final readonly class HttpRequest implements Request
     public function __construct(
         private Method $method,
         private string $uri,
-        private array $body = []
+        private array $body = [],
+        private array $headers = [],
     ) {}
 
     public function getMethod(): Method
@@ -25,6 +26,11 @@ final readonly class HttpRequest implements Request
     public function getBody(): array
     {
         return $this->body;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 
 }

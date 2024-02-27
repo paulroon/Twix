@@ -51,6 +51,11 @@ final class GenericRouter implements Router
         return new HttpResponse(Status::HTTP_404, "NOT FOUND");
     }
 
+    public function listControllers(): array
+    {
+        return $this->routerConfig->controller;
+    }
+
     private function resolveParams(string $routeUri, string $requestUri): array
     {
         $result = preg_match_all('/\{\w+}/', $routeUri, $tokens);
