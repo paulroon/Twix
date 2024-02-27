@@ -30,7 +30,6 @@ final class GenericContainer implements Container
 
     /**
      * @throws ContainerException
-     * @throws ReflectionException
      */
     public function singleton(string $classname, callable $definition = null): Container
     {
@@ -41,7 +40,6 @@ final class GenericContainer implements Container
     }
 
     /**
-     * @throws ReflectionException
      * @throws ContainerException
      */
     public function get(string $classname): object
@@ -49,40 +47,45 @@ final class GenericContainer implements Container
         if (isset($this->singletons[$classname])) {
             if ($this->singletons[$classname] === false) {
                 $definition = $this->definitions[$classname];
-                $this->singletons[$classname] = $definition();
+                $this->singletons[$classname] = $definition($this);
             }
             $instance = $this->singletons[$classname];
 
         } else {
             $definition = $this->definitions[$classname] ?? $this->autowire_definition($classname);
-            $instance =  $definition();
+            $instance =  $definition($this);
         }
 
         return $instance;
     }
 
+
     /**
-     * @throws ReflectionException
      * @throws ContainerException
      */
     private function autowire_definition(string $classname): callable
     {
-        $reflectionClass = new \ReflectionClass($classname);
+        try {
+            $reflectionClass = new \ReflectionClass($classname);
 
-        $constructorParams = array_map(
-            function (ReflectionParameter $cParam) use ($classname) {
-                $dependencyClassName = $cParam->getType()?->getName();
+            $constructorParams = array_map(
+                function (ReflectionParameter $cParam) use ($classname) {
+                    $dependencyClassName = $cParam->getType()?->getName();
 
-                if (!$dependencyClassName) {
-                    $paramName = $cParam->getName();
-                    throw new ContainerException(sprintf("Cannot Autowire %s:: Dependency [%s] has no class type definition.", $classname, $paramName));
-                }
+                    if (!$dependencyClassName) {
+                        $paramName = $cParam->getName();
+                        throw new ContainerException(sprintf("Cannot Autowire %s:: Dependency [%s] has no class type definition.", $classname, $paramName));
+                    }
 
-                return $this->get($dependencyClassName);
-            },
-            $reflectionClass->getConstructor()?->getParameters() ?? []
-        );
+                    return $this->get($dependencyClassName);
+                },
+                $reflectionClass->getConstructor()?->getParameters() ?? []
+            );
 
-        return fn () => new $classname(...$constructorParams);
+            return fn () => new $classname(...$constructorParams);
+        } catch (ReflectionException $e) {
+            throw new ContainerException(sprintf("There was a problem with autowire inspection for class %s", $classname));
+        }
+
     }
 }
