@@ -7,7 +7,7 @@ use Twix\Application\AppConfig;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
 use Twix\Container\GenericContainer;
-use Twix\Container\HTTPContainer;
+use Twix\Container\HTTPContainerInitializer;
 use Twix\Interfaces\Application;
 use Twix\Interfaces\Container;
 
@@ -45,7 +45,7 @@ final readonly class Twix
 
         $container->singleton(
             classname: Application::class,
-            definition: fn () => new HttpApplication(HTTPContainer::init($container))
+            definition: fn () => new HttpApplication(HTTPContainerInitializer::init($container))
         );
 
         return $container->get(Application::class);

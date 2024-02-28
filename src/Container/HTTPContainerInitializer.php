@@ -2,7 +2,6 @@
 
 namespace Twix\Container;
 
-use App\Controllers\HomeController;
 use Twix\Application\AppConfig;
 use Twix\Filesystem\ClassFinder;
 use Twix\Http\GenericRouter;
@@ -13,7 +12,7 @@ use Twix\Interfaces\Container;
 use Twix\Interfaces\Request;
 use Twix\Interfaces\Router;
 
-final readonly class HTTPContainer
+final readonly class HTTPContainerInitializer
 {
     public static function init(Container $container): Container
     {
