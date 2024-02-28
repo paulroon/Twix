@@ -34,10 +34,11 @@ final readonly class HTTPContainerInitializer
         ));
 
         self::setupRouter($applicationClasses, $container);
-        self::setupLifeCycleEvents($container);
         self::setupApplicationEvents($applicationClasses, $container);
-        self::buildHttpRequest($container);
+        self::setupLifeCycleEvents($container);
+        // self::buildHttpRequest($container);
 
+        //dd($container);
         return $container;
     }
 

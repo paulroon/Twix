@@ -6,7 +6,7 @@ use Twix\Interfaces\Response;
 
 final readonly class HttpResponder
 {
-    public function send(Response $response): Response
+    public function send(Response $response): void
     {
         ob_start();
 
@@ -16,8 +16,6 @@ final readonly class HttpResponder
         $this->sendContent($response);
 
         ob_end_flush();
-
-        return $response;
     }
 
     private function sendHeaders(Response $response): void
