@@ -3,8 +3,10 @@
 namespace Twix\Container;
 
 use App\Rando;
+use ReflectionClass;
 use ReflectionException;
 use Twix\Application\AppConfig;
+use Twix\Events\Handler;
 use Twix\Filesystem\ClassFinder;
 use Twix\Filesystem\ClassInspector;
 use Twix\Http\Get;
@@ -15,6 +17,7 @@ use Twix\Http\Post;
 use Twix\Http\Route;
 use Twix\Http\RouterConfig;
 use Twix\Interfaces\Container;
+use Twix\Interfaces\EventBus;
 use Twix\Interfaces\Request;
 use Twix\Interfaces\Router;
 
@@ -30,9 +33,10 @@ final readonly class HTTPContainerInitializer
             $container->get(AppConfig::class)->getRoot()
         ));
 
-
         self::setupRouter($applicationClasses, $container);
-        self::buildRequest($container);
+        self::setupLifeCycleEvents($container);
+        self::setupApplicationEvents($applicationClasses, $container);
+        self::buildHttpRequest($container);
 
         return $container;
     }
@@ -66,7 +70,7 @@ final readonly class HTTPContainerInitializer
     /**
      * Build The HTTP Request
      */
-    private static function buildRequest(Container &$container): void
+    private static function buildHttpRequest(Container &$container): void
     {
         $method = Method::tryFrom($_SERVER['REQUEST_METHOD']) ?? Method::GET;
         $container->register(Request::class, fn () => new HttpRequest(
@@ -77,5 +81,68 @@ final readonly class HTTPContainerInitializer
                 default => $_GET,
             }
         ));
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private static function setupApplicationEvents(array $applicationClasses, Container $container): void
+    {
+
+        $eventHandlerClasses = array_filter(
+            $applicationClasses,
+            fn (string $handlerClass) => ClassInspector::HasMethodWithAttribute($handlerClass, [
+                Handler::class
+            ])
+        );
+
+        self::registerHandlersFromClassList($eventHandlerClasses, $container);
+
+    }
+
+
+    /**
+     * @throws ReflectionException
+     */
+    private static function setupLifeCycleEvents(Container $container): void
+    {
+        $eventHandlerClasses = array_filter(
+            ClassFinder::findClassesInDir(sprintf(
+                "%s/Events",
+                $container->get(AppConfig::class)->getTwixRoot()
+            )),
+            fn (string $handlerClass) => ClassInspector::HasMethodWithAttribute($handlerClass, [
+                Handler::class
+            ])
+        );
+
+        self::registerHandlersFromClassList($eventHandlerClasses, $container);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private static function registerHandlersFromClassList(array $eventHandlerClasses, Container $container): void
+    {
+        /** @var EventBus $eventbus */
+        $eventbus = $container->get(EventBus::class);
+
+        // Adds ReflectionMethods to the EventBus Handler Map
+        foreach ($eventHandlerClasses as $handlerClassName) {
+            $reflectionClass = new ReflectionClass($handlerClassName);
+            foreach ($reflectionClass->getMethods() as $reflectionMethod) {
+                $reflectionHandlerAttributes = $reflectionMethod->getAttributes(Handler::class);
+
+                if (count($reflectionHandlerAttributes) < 1) {
+                    continue;
+                }
+
+                foreach ($reflectionHandlerAttributes as $handlerAttribute) {
+                    $eventName = $handlerAttribute->getArguments()[0];
+                    $eventbus->addHandler($eventName, $reflectionMethod);
+                }
+
+            }
+        }
     }
 }

@@ -8,8 +8,10 @@ use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
 use Twix\Container\TwixContainer;
 use Twix\Container\HTTPContainerInitializer;
+use Twix\Events\TwixEventBus;
 use Twix\Interfaces\Application;
 use Twix\Interfaces\Container;
+use Twix\Interfaces\EventBus;
 
 final class Twix
 {
@@ -25,10 +27,12 @@ final class Twix
             $container
                 ->singleton(Container::class, fn () => $container)
                 ->singleton(AppConfig::class, fn () => new AppConfig(
+                        twixRoot: realpath(__DIR__),
                         root: realpath($rootDir),
                         env: env('ENVIRONMENT', 'dev')
                     )
-                );
+                )
+                ->singleton(EventBus::class, fn () => new TwixEventBus());
 
             self::$kernel = new Kernel($container);
 
