@@ -8,7 +8,7 @@ use Twix\Exceptions\ContainerException;
 use Twix\Interfaces\Container;
 
 
-final class GenericContainer implements Container
+final class TwixContainer implements Container
 {
     /**
      * @var callable[]|array

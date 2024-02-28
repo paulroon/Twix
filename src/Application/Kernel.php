@@ -2,19 +2,12 @@
 
 namespace Twix\Application;
 
-use App\Controllers\HomeController;
-use Twix\Http\GenericRouter;
-use Twix\Http\HttpRequest;
-use Twix\Http\RouterConfig;
 use Twix\Interfaces\Container;
-use Twix\Interfaces\Request;
-use Twix\Interfaces\Response;
-use Twix\Interfaces\Router;
 
 final readonly class Kernel
 {
     public function __construct(
-        private readonly Container $container
+        private Container $container
     ) {}
 
     public function init(): Container

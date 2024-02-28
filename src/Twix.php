@@ -6,16 +6,14 @@ use Dotenv\Dotenv;
 use Twix\Application\AppConfig;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
-use Twix\Container\GenericContainer;
+use Twix\Container\TwixContainer;
 use Twix\Container\HTTPContainerInitializer;
 use Twix\Interfaces\Application;
 use Twix\Interfaces\Container;
 
-final readonly class Twix
+final class Twix
 {
-    private function __construct(
-        private Kernel $kernel
-    ) { }
+    public static Kernel $kernel;
 
     public static function boot(string $rootDir): Twix
     {
@@ -23,7 +21,7 @@ final readonly class Twix
             $dotenv = Dotenv::createUnsafeImmutable($rootDir);
             $dotenv->safeLoad();
 
-            $container = new GenericContainer();
+            $container = new TwixContainer();
             $container
                 ->singleton(Container::class, fn () => $container)
                 ->singleton(AppConfig::class, fn () => new AppConfig(
@@ -32,11 +30,13 @@ final readonly class Twix
                     )
                 );
 
-            return new self(kernel: new Kernel($container));
+            self::$kernel = new Kernel($container);
 
         } catch (\Throwable $e) {
             // handle
         }
+
+        return new self();
     }
 
     public function http(): HttpApplication
@@ -51,18 +51,18 @@ final readonly class Twix
         return $container->get(Application::class);
     }
 
-    public function getContainer(): Container
+    public static function getContainer(): Container
     {
-        return $this->getKernel()->getContainer();
+        return self::$kernel->getContainer();
     }
 
-    public function getKernel(): Kernel
+    public static function getKernel(): Kernel
     {
-        return $this->kernel;
+        return self::$kernel;
     }
 
-    public function getAppConfig(): AppConfig
+    public static function getAppConfig(): AppConfig
     {
-        return $this->getContainer()->get(AppConfig::class);
+        return self::$kernel->getContainer()->get(AppConfig::class);
     }
 }

@@ -21,6 +21,7 @@ final readonly class HttpApplication implements Application
             $router = $this->container->get(Router::class);
             $request = $this->container->get(Request::class);
 
+
             $httpResponder = $this->container->get(HttpResponder::class);
             $httpResponder->send(
                 $router->dispatch($request),

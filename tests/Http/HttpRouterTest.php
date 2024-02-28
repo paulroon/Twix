@@ -3,14 +3,14 @@
 namespace Twix\Test\Http;
 
 use Twix\Exceptions\ContainerException;
-use Twix\Http\GenericRouter;
+use Twix\Http\HttpRouter;
 use Twix\Http\HttpRequest;
 use Twix\Http\Method;
 use Twix\Http\Status;
 use Twix\Interfaces\Router;
 use Twix\Test\TestCase;
 
-class GenericRouterTest extends TestCase
+class HttpRouterTest extends TestCase
 {
     /**
      * @test
@@ -25,7 +25,7 @@ class GenericRouterTest extends TestCase
                 uri: '/')
         );
 
-        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
         $this->assertSame("Hello World!", $response->getBody());
     }
@@ -43,7 +43,7 @@ class GenericRouterTest extends TestCase
                 uri: '/this/does/not/exist')
         );
 
-        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_404, $response->getStatus());
     }
 
@@ -60,7 +60,7 @@ class GenericRouterTest extends TestCase
                 uri: '/greet/freddy')
         );
 
-        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
         $this->assertSame("Hello freddy!", $response->getBody());
     }
@@ -78,9 +78,9 @@ class GenericRouterTest extends TestCase
                 uri: '/greet/freddy/with/mug')
         );
 
-        $this->assertSame($router::class, GenericRouter::class);
+        $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
-        $this->assertSame("Hello freddy, heres a mug!", $response->getBody());
+        $this->assertSame("Hello freddy, here's a mug!", $response->getBody());
     }
 
 }

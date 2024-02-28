@@ -3,16 +3,16 @@
 namespace Twix\Test\Container;
 
 use PHPUnit\Framework\TestCase;
-use Twix\Container\GenericContainer;
+use Twix\Container\TwixContainer;
 use Twix\Exceptions\ContainerException;
 
-class GenericContainerTest extends TestCase
+class TwixContainerTest extends TestCase
 {
 
     /** @test */
     public function testContainer()
     {
-        $container = new GenericContainer();
+        $container = new TwixContainer();
 
         $container->register(ThingA::class, fn () => new ThingA());
 
@@ -24,7 +24,7 @@ class GenericContainerTest extends TestCase
     /** @test */
     public function testContainerAutowire()
     {
-        $container = new GenericContainer();
+        $container = new TwixContainer();
 
         $instance = $container->get(ThingA::class);
 
@@ -34,7 +34,7 @@ class GenericContainerTest extends TestCase
     /** @test */
     public function testContainerWithDependencies()
     {
-        $container = new GenericContainer();
+        $container = new TwixContainer();
 
         $instance = $container->get(ThingB::class);
 
@@ -44,7 +44,7 @@ class GenericContainerTest extends TestCase
     /** @test */
     public function testContainerWithUndefinedDependencies()
     {
-        $container = new GenericContainer();
+        $container = new TwixContainer();
 
         $this->expectException(ContainerException::class);
         $this->expectExceptionMessage("Cannot Autowire Twix\Test\Container\ThingC:: Dependency [subThing1] has no class type definition.");
@@ -53,7 +53,7 @@ class GenericContainerTest extends TestCase
 
     public function testSingleton()
     {
-        $container = new GenericContainer();
+        $container = new TwixContainer();
 
         $instance = $container
             ->singleton(SingletonThing::class)

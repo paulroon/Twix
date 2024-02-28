@@ -8,7 +8,7 @@ use Twix\Interfaces\Request;
 use Twix\Interfaces\Response;
 use Twix\Interfaces\Router;
 
-final class GenericRouter implements Router
+final readonly class HttpRouter implements Router
 {
 
     public function __construct(

@@ -4,7 +4,7 @@ namespace Twix\Container;
 
 use Twix\Application\AppConfig;
 use Twix\Filesystem\ClassFinder;
-use Twix\Http\GenericRouter;
+use Twix\Http\HttpRouter;
 use Twix\Http\HttpRequest;
 use Twix\Http\Method;
 use Twix\Http\RouterConfig;
@@ -29,7 +29,7 @@ final readonly class HTTPContainerInitializer
 
         $container->singleton(
             Router::class,
-            fn (Container $container) => new GenericRouter($container, $container->get(RouterConfig::class))
+            fn (Container $container) => new HttpRouter($container, $container->get(RouterConfig::class))
         );
 
         $method = Method::tryFrom($_SERVER['REQUEST_METHOD']) ?? Method::GET;
