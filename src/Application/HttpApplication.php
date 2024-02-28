@@ -8,6 +8,7 @@ use Twix\Interfaces\Application;
 use Twix\Interfaces\Container;
 use Twix\Interfaces\Request;
 use Twix\Interfaces\Router;
+use Twix\Twix;
 
 final readonly class HttpApplication implements Application
 {
