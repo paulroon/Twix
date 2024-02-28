@@ -2,15 +2,12 @@
 
 use Twix\Twix;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$appRoot = __DIR__ . '/../';
 
-$twix = Twix::boot(__DIR__ . '/../');
+require_once $appRoot . 'vendor/autoload.php';
 
-$httpApp = $twix->http();
-
-//    $router = $twix->getContainer()->get(\Twix\Interfaces\Router::class);
-//    dd($router->listControllers());
-
-$httpApp->run();
+Twix::boot($appRoot)
+    ->http()
+    ->run();
 
 exit;
