@@ -7,6 +7,7 @@ use Twix\Application\AppConfig;
 use Twix\Http\Get;
 use Twix\Http\HttpResponse;
 use Twix\Http\Status;
+use Twix\Interfaces\Logger;
 use Twix\Interfaces\Response;
 use Twix\Twix;
 
@@ -20,6 +21,7 @@ final readonly class DefaultController
     {
         $env = Twix::getContainer()->get(AppConfig::class)->getEnv();
 
+        Twix::getContainer()->get(Logger::class)->critical("hello from the controller");
 
         //        throw new Exception('My Application Error');
 

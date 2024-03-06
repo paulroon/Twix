@@ -78,4 +78,13 @@ final class TwixLogger implements Logger
         return $this->logStack;
     }
 
+    public function getLog(): array
+    {
+        return array_map(fn (LogItem $logItem) => [
+            $logItem->getLevel()->value,
+            $logItem->getTime(),
+            $logItem->getMessage()
+        ], $this->getLogStack());
+    }
+
 }

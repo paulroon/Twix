@@ -7,9 +7,11 @@ use Twix\Http\HttpResponder;
 use Twix\Http\HttpResponse;
 use Twix\Http\Method;
 use Twix\Http\Status;
+use Twix\Interfaces\Logger;
 use Twix\Interfaces\Request;
 use Twix\Interfaces\Response;
 use Twix\Interfaces\Router;
+use Twix\Logger\TwixLogger;
 use Twix\Twix;
 
 final readonly class HttpLifecycle
@@ -82,5 +84,12 @@ final readonly class HttpLifecycle
     public function handleHttpTermination(HttpTerminationEvent $terminationEvent): void
     {
         // handle post response stuff here
+        $container = Twix::getContainer();
+
+        /** @var TwixLogger $logger */
+        $logger = $container->get(Logger::class);
+
+        dump($logger->getLog());
+
     }
 }

@@ -6,6 +6,7 @@ use ReflectionException;
 use ReflectionMethod;
 use Twix\Interfaces\Event;
 use Twix\Interfaces\EventBus;
+use Twix\Interfaces\Logger;
 use Twix\Twix;
 
 final class TwixEventBus implements EventBus
@@ -18,11 +19,15 @@ final class TwixEventBus implements EventBus
     public function dispatch(Event $event): void
     {
         $eventHandlers = $this->handlers[$event::class] ?? [];
+        $container = Twix::getContainer();
+        $logger = $container->get(Logger::class);
 
         /** @var ReflectionMethod $reflectionMethod */
         foreach ($eventHandlers as $reflectionMethod) {
 
-            $handler = Twix::getContainer()->get($reflectionMethod->getDeclaringClass()->getName());
+            $handler = $container->get($reflectionMethod->getDeclaringClass()->getName());
+
+            $logger->info(sprintf("EventHandler: %s::%s(%s)", $handler::class, $reflectionMethod->getName(), $event::class));
 
             $reflectionMethod->invoke($handler, $event);
         }
