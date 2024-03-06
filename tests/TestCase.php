@@ -32,7 +32,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
                 controller: [
                     TestController::class,
                 ]
-            ));
+            )
+        );
 
         $this->container->singleton(
             Router::class,

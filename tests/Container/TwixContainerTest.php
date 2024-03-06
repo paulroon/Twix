@@ -8,7 +8,6 @@ use Twix\Exceptions\ContainerException;
 
 class TwixContainerTest extends TestCase
 {
-
     /** @test */
     public function testContainer()
     {
@@ -68,26 +67,38 @@ class TwixContainerTest extends TestCase
     }
 }
 
-class ThingA {}
-
-class ThingB {
-    public function __construct(
-        private SubThing1 $subThing
-    ) {}
+class ThingA
+{
 }
 
-class ThingC {
+class ThingB
+{
+    public function __construct(
+        private SubThing1 $subThing
+    ) {
+    }
+}
+
+class ThingC
+{
     public function __construct(
         private $subThing1,
         private SubThing2 $subThing2,
-    ) {}
+    ) {
+    }
 }
 
-class SubThing1 {}
-class SubThing2 {}
+class SubThing1
+{
+}
+class SubThing2
+{
+}
 
-class SingletonThing {
+class SingletonThing
+{
     public static $count = 0;
+
     public function __construct()
     {
         self::$count++;

@@ -3,8 +3,8 @@
 namespace Twix\Test\Http;
 
 use Twix\Exceptions\ContainerException;
-use Twix\Http\HttpRouter;
 use Twix\Http\HttpRequest;
+use Twix\Http\HttpRouter;
 use Twix\Http\Method;
 use Twix\Http\Status;
 use Twix\Interfaces\Router;
@@ -20,9 +20,11 @@ class HttpRouterTest extends TestCase
     {
         $router = $this->container->get(Router::class);
 
-        $response = $router->dispatch(new HttpRequest(
+        $response = $router->dispatch(
+            new HttpRequest(
                 method: Method::GET,
-                uri: '/')
+                uri: '/'
+            )
         );
 
         $this->assertSame($router::class, HttpRouter::class);
@@ -38,9 +40,11 @@ class HttpRouterTest extends TestCase
     {
         $router = $this->container->get(Router::class);
 
-        $response = $router->dispatch(new HttpRequest(
+        $response = $router->dispatch(
+            new HttpRequest(
                 method: Method::GET,
-                uri: '/this/does/not/exist')
+                uri: '/this/does/not/exist'
+            )
         );
 
         $this->assertSame($router::class, HttpRouter::class);
@@ -55,9 +59,11 @@ class HttpRouterTest extends TestCase
     {
         $router = $this->container->get(Router::class);
 
-        $response = $router->dispatch(new HttpRequest(
+        $response = $router->dispatch(
+            new HttpRequest(
                 method: Method::GET,
-                uri: '/greet/freddy')
+                uri: '/greet/freddy'
+            )
         );
 
         $this->assertSame($router::class, HttpRouter::class);
@@ -73,14 +79,15 @@ class HttpRouterTest extends TestCase
     {
         $router = $this->container->get(Router::class);
 
-        $response = $router->dispatch(new HttpRequest(
+        $response = $router->dispatch(
+            new HttpRequest(
                 method: Method::GET,
-                uri: '/greet/freddy/with/mug')
+                uri: '/greet/freddy/with/mug'
+            )
         );
 
         $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
         $this->assertSame("Hello freddy, here's a mug!", $response->getBody());
     }
-
 }

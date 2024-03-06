@@ -21,13 +21,21 @@ class ClassInspectorTest extends TestCase
 }
 
 #[\Attribute]
-class TestAttr {}
-
-class WithMethodAttr {
-    #[TestAttr]
-    public function thisOne() {}
+class TestAttr
+{
 }
 
-class NoMethodAttr {
-    public function thisOne() {}
+class WithMethodAttr
+{
+    #[TestAttr]
+    public function thisOne()
+    {
+    }
+}
+
+class NoMethodAttr
+{
+    public function thisOne()
+    {
+    }
 }

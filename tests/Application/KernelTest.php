@@ -17,5 +17,4 @@ class KernelTest extends TestCase
         $this->assertSame($kernel::class, Kernel::class);
         $this->assertInstanceOf(Container::class, $kernel->getContainer());
     }
-
 }
