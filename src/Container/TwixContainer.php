@@ -28,6 +28,11 @@ final class TwixContainer implements Container
         return $this;
     }
 
+    public function isRegistered(string $classname): bool
+    {
+        return isset($this->definitions[$classname]);
+    }
+
     /**
      * @throws ContainerException
      */

@@ -1,13 +1,10 @@
 <?php
 
-use Twix\Twix;
+use function Twix\runHttpApp;
 
 $appRoot = __DIR__ . '/../';
-
 require_once $appRoot . 'vendor/autoload.php';
 
-Twix::boot($appRoot)
-    ->http()
-    ->run();
+runHttpApp($appRoot);
 
 exit;

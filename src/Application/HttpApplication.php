@@ -4,6 +4,7 @@ namespace Twix\Application;
 
 use Throwable;
 use Twix\Events\HttpControllerEvent;
+use Twix\Events\HttpErrorResponse;
 use Twix\Events\HttpRequestEvent;
 use Twix\Events\HttpResponderEvent;
 use Twix\Events\HttpResponseEvent;
@@ -24,27 +25,28 @@ final readonly class HttpApplication implements Application
 
     public function run(): void
     {
-        try {
+        // pre-controller event
+        $this->container->get(EventBus::class)->dispatch(new HttpRequestEvent());
 
-            // pre-controller event
-            $this->container->get(EventBus::class)->dispatch(new HttpRequestEvent());
+        // Run Controller
+        $this->container->get(EventBus::class)->dispatch(new HttpControllerEvent());
 
-            // Run Controller
-            $this->container->get(EventBus::class)->dispatch(new HttpControllerEvent());
+        // Post-controller / Pre-responder event
+        $this->container->get(EventBus::class)->dispatch(new HttpResponseEvent());
 
-            // Post-controller / Pre-responder event
-            $this->container->get(EventBus::class)->dispatch(new HttpResponseEvent());
+        // Run Http Responder
+        $this->container->get(EventBus::class)->dispatch(new HttpResponderEvent());
 
-            // Run Http Responder
-            $this->container->get(EventBus::class)->dispatch(new HttpResponderEvent());
+        // Post responder / Terminator Event
+        $this->container->get(EventBus::class)->dispatch(new HttpTerminationEvent());
+    }
 
-            // Post responder / Terminator Event
-            $this->container->get(EventBus::class)->dispatch(new HttpTerminationEvent());
+    public function handleError(Throwable $throwable): void
+    {
+        // Run Http Error Responder
+        $this->container->get(EventBus::class)->dispatch(new HttpErrorResponse($throwable));
 
-
-
-        } catch (Throwable $e) {
-            dd($e);
-        }
+        // Run Http Responder
+        $this->container->get(EventBus::class)->dispatch(new HttpResponderEvent());
     }
 }

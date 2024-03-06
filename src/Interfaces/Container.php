@@ -6,6 +6,8 @@ interface Container
 {
     public function register(string $classname, callable $definition): self;
 
+    public function isRegistered(string $classname): bool;
+
     public function singleton(string $classname, callable $definition): self;
 
     /**

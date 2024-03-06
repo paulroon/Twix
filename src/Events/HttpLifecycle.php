@@ -55,6 +55,29 @@ final readonly class HttpLifecycle
         $httpResponder->send($httpResponse);
     }
 
+    #[Handler(HttpErrorResponse::class)]
+    public function handleErrorResponseEvent(HttpErrorResponse $httpErrorResponse): void
+    {
+        $container = Twix::getContainer();
+        $currentResponse = $container->isRegistered(Response::class)
+            ? $container->get(Response::class)
+            : false;
+
+        // will not run if there is a current successful Response
+        // this allows previously generated Error responses to persist
+        if (!$currentResponse || $currentResponse->getStatus()->isSuccessful()) {
+
+            $httpErrorResponse = new HttpResponse(
+                status: $httpErrorResponse->getHttpErrorStatus(),
+                body: $httpErrorResponse->getThrowable()?->getMessage() ?? "Error",
+                headers: []
+            );
+
+            $container->register(Response::class, fn () => $httpErrorResponse);
+        }
+
+    }
+
     #[Handler(HttpTerminationEvent::class)]
     public function handleHttpTermination(HttpTerminationEvent $terminationEvent): void
     {
