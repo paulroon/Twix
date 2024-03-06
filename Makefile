@@ -8,6 +8,7 @@ logs: docker-compose-logs
 cu: composer-update
 ci: composer-install
 test: phpunit-tests
+tests: phpunit-tests
 
 #
 # Docker Compose
