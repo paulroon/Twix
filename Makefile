@@ -10,6 +10,8 @@ cu: composer-update
 ci: composer-install
 test: phpunit-tests
 tests: phpunit-tests
+csfix-ls: cs-fixer-dryrun
+csfix: cs-fixer-fix
 
 #
 # Docker Compose
@@ -35,3 +37,11 @@ composer-install:
 phpunit-tests:
 	@echo "====================      PHPUnit tests      ====================="
 	docker exec -it app-php vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices
+
+cs-fixer-dryrun:
+	@echo "====================      PHP CS Fixer Dry Run      ====================="
+	docker exec -it app-php vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots
+
+cs-fixer-fix:
+	@echo "====================      PHP CS Fixer      ====================="
+	docker exec -it app-php vendor/bin/php-cs-fixer fix -vvv --show-progress=dots

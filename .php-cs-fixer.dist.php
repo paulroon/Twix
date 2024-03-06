@@ -2,9 +2,9 @@
 
 $finder = Symfony\Component\Finder\Finder::create()
     ->in([
-        __DIR__ . '/src',
+//        __DIR__ . '/src',
         __DIR__ . '/app',
-        __DIR__ . '/tests',
+//        __DIR__ . '/tests',
     ])
     ->name('*.php')
     ->ignoreDotFiles(true)
@@ -37,6 +37,6 @@ return (new PhpCsFixer\Config())
             'keep_multiple_spaces_after_comma' => true,
         ],
         'single_trait_insert_per_statement' => true,
-        'declare_strict_types' => true,
+        'declare_strict_types' => false,
     ])
     ->setFinder($finder);
