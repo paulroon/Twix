@@ -1,6 +1,7 @@
 # Docker Compose (For Local Development)
 #
 up: docker-compose-down docker-compose-up
+refresh: docker-compose-down docker-cleanup docker-compose-up
 down: docker-compose-down
 clean: docker-cleanup
 kill: docker-compose-down docker-cleanup
