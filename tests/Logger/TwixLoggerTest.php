@@ -120,12 +120,9 @@ class TwixLoggerTest extends TestCase
 
         $this->assertCount(1, $logger->getLogStack());
 
-        dump($logger->getLogStack());
         $logger->info("info Message");
         $logger->emergency("emergency Message");
         $logger->alert("alert Message");
-
-        dump($logger->getLogStack());
 
         $this->assertCount(4, $logger->getLogStack());
 
