@@ -24,6 +24,7 @@ namespace Twix {
     function runHttpApp(string $appRoot): void
     {
         $application = Twix::boot($appRoot)->http();
+
         try {
             $application->run();
         } catch (\Throwable $throwable) {

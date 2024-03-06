@@ -8,7 +8,8 @@ final readonly class Kernel
 {
     public function __construct(
         private Container $container
-    ) {}
+    ) {
+    }
 
     public function init(): Container
     {

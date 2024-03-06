@@ -7,7 +7,9 @@ use Twix\Interfaces\Event;
 
 final readonly class HttpErrorResponse implements Event
 {
-    public function __construct(private \Throwable $throwable, private Status $status = Status::HTTP_500) {}
+    public function __construct(private \Throwable $throwable, private Status $status = Status::HTTP_500)
+    {
+    }
 
     public function getThrowable(): \Throwable
     {

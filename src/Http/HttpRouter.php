@@ -10,11 +10,11 @@ use Twix\Interfaces\Router;
 
 final readonly class HttpRouter implements Router
 {
-
     public function __construct(
         private Container $container,
         private RouterConfig $routerConfig
-    ) { }
+    ) {
+    }
 
     /**
      * @throws ReflectionException
@@ -27,7 +27,7 @@ final readonly class HttpRouter implements Router
             foreach ($reflectionClass->getMethods() as $method) {
                 $attribute = $method->getAttributes(Route::class, \ReflectionAttribute::IS_INSTANCEOF)[0] ?? null;
 
-                if (!$attribute) {
+                if (! $attribute) {
                     continue;
                 }
 
@@ -44,6 +44,7 @@ final readonly class HttpRouter implements Router
                 }
 
                 $controller = $this->container->get($controllerClass);
+
                 return $controller->{$method->getName()}(...$params);
             }
         }
@@ -60,7 +61,7 @@ final readonly class HttpRouter implements Router
     {
         $result = preg_match_all('/\{\w+}/', $routeUri, $tokens);
 
-        if (!$result) {
+        if (! $result) {
             return [];
         }
         $tokens = $tokens[0];

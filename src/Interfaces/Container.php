@@ -16,5 +16,4 @@ interface Container
      * @return TClassName
      */
     public function get(string $classname): object;
-
 }

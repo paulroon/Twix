@@ -42,9 +42,9 @@ final readonly class HttpLifecycle
     #[Handler(HttpResponseEvent::class)]
     public function handleResponse(HttpResponseEvent $responseEvent): void
     {
-//        $httpResponse = Twix::getContainer()->get(Response::class);
-//        $newHttpResponse = new HttpResponse(Status::HTTP_404, "DOWN FOR MAINTENANCE!!!");
-//        Twix::getContainer()->register(Response::class, fn () => $newHttpResponse);
+        //        $httpResponse = Twix::getContainer()->get(Response::class);
+        //        $newHttpResponse = new HttpResponse(Status::HTTP_404, "DOWN FOR MAINTENANCE!!!");
+        //        Twix::getContainer()->register(Response::class, fn () => $newHttpResponse);
     }
 
     #[Handler(HttpResponderEvent::class)]
@@ -65,7 +65,7 @@ final readonly class HttpLifecycle
 
         // will not run if there is a current successful Response
         // this allows previously generated Error responses to persist
-        if (!$currentResponse || $currentResponse->getStatus()->isSuccessful()) {
+        if (! $currentResponse || $currentResponse->getStatus()->isSuccessful()) {
 
             $httpErrorResponse = new HttpResponse(
                 status: $httpErrorResponse->getHttpErrorStatus(),

@@ -10,7 +10,8 @@ final class HttpResponse implements Response
         public Status $status,
         public string|array $body,
         public array $headers = []
-    ) {}
+    ) {
+    }
 
     public function getBody(): string|array
     {
@@ -20,6 +21,7 @@ final class HttpResponse implements Response
     public function body(string|array $body): HttpResponse
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -31,6 +33,7 @@ final class HttpResponse implements Response
     public function status(Status $status): HttpResponse
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -42,6 +45,7 @@ final class HttpResponse implements Response
     public function addHeader(string $key, string $value): HttpResponse
     {
         $this->headers[$key] = $value;
+
         return $this;
     }
 }

@@ -7,7 +7,6 @@ use ReflectionParameter;
 use Twix\Exceptions\ContainerException;
 use Twix\Interfaces\Container;
 
-
 final class TwixContainer implements Container
 {
     /**
@@ -19,7 +18,6 @@ final class TwixContainer implements Container
      * @var object[]|array
      */
     private array $singletons = [];
-
 
     public function register(string $classname, callable $definition): Container
     {
@@ -58,12 +56,11 @@ final class TwixContainer implements Container
 
         } else {
             $definition = $this->definitions[$classname] ?? $this->autowire_definition($classname);
-            $instance =  $definition($this);
+            $instance = $definition($this);
         }
 
         return $instance;
     }
-
 
     /**
      * @throws ContainerException
@@ -77,8 +74,9 @@ final class TwixContainer implements Container
                 function (ReflectionParameter $cParam) use ($classname) {
                     $dependencyClassName = $cParam->getType()?->getName();
 
-                    if (!$dependencyClassName) {
+                    if (! $dependencyClassName) {
                         $paramName = $cParam->getName();
+
                         throw new ContainerException(sprintf("Cannot Autowire %s:: Dependency [%s] has no class type definition.", $classname, $paramName));
                     }
 

@@ -8,7 +8,8 @@ final readonly class AppConfig
         private readonly string $twixRoot,
         private readonly string $root,
         private readonly string $env,
-    ) {}
+    ) {
+    }
 
     public function getTwixRoot(): string
     {

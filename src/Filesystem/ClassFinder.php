@@ -45,12 +45,14 @@ final readonly class ClassFinder
                         if ($tokens[$j] === '{' && $tokens[$index - 1][1] !== "::") {
                             $className = $tokens[$index + 2][1];
                             $classes[] = ltrim($namespace . '\\' . $className, '\\');
+
                             break;
                         }
                     }
                 }
             }
         }
+
         return $classes;
     }
 
@@ -73,10 +75,10 @@ final readonly class ClassFinder
         }
     }
 
-//    public static function findPhpFilesInDir(string $path): RegexIterator
-//    {
-//        $directoryIterator = new RecursiveDirectoryIterator($path);
-//        $iterator = new RecursiveIteratorIterator($directoryIterator);
-//        return new RegexIterator($iterator, '/\.php$/');
-//    }
+    //    public static function findPhpFilesInDir(string $path): RegexIterator
+    //    {
+    //        $directoryIterator = new RecursiveDirectoryIterator($path);
+    //        $iterator = new RecursiveIteratorIterator($directoryIterator);
+    //        return new RegexIterator($iterator, '/\.php$/');
+    //    }
 }

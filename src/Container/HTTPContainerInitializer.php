@@ -2,7 +2,6 @@
 
 namespace Twix\Container;
 
-use App\Rando;
 use ReflectionClass;
 use ReflectionException;
 use Twix\Application\AppConfig;
@@ -10,8 +9,8 @@ use Twix\Events\Handler;
 use Twix\Filesystem\ClassFinder;
 use Twix\Filesystem\ClassInspector;
 use Twix\Http\Get;
-use Twix\Http\HttpRouter;
 use Twix\Http\HttpRequest;
+use Twix\Http\HttpRouter;
 use Twix\Http\Method;
 use Twix\Http\Post;
 use Twix\Http\Route;
@@ -52,7 +51,7 @@ final readonly class HTTPContainerInitializer
         $controllers = array_filter(
             $applicationClasses,
             fn (string $controllerClass) => ClassInspector::HasMethodWithAttribute($controllerClass, [
-                Get::class, Post::class, Route::class
+                Get::class, Post::class, Route::class,
             ])
         );
 
@@ -60,7 +59,8 @@ final readonly class HTTPContainerInitializer
             RouterConfig::class,
             fn () => new RouterConfig(
                 controller: $controllers
-            ));
+            )
+        );
 
         $container->singleton(
             Router::class,
@@ -93,14 +93,13 @@ final readonly class HTTPContainerInitializer
         $eventHandlerClasses = array_filter(
             $applicationClasses,
             fn (string $handlerClass) => ClassInspector::HasMethodWithAttribute($handlerClass, [
-                Handler::class
+                Handler::class,
             ])
         );
 
         self::registerHandlersFromClassList($eventHandlerClasses, $container);
 
     }
-
 
     /**
      * @throws ReflectionException
@@ -113,7 +112,7 @@ final readonly class HTTPContainerInitializer
                 $container->get(AppConfig::class)->getTwixRoot()
             )),
             fn (string $handlerClass) => ClassInspector::HasMethodWithAttribute($handlerClass, [
-                Handler::class
+                Handler::class,
             ])
         );
 

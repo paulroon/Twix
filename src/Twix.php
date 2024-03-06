@@ -6,8 +6,8 @@ use Dotenv\Dotenv;
 use Twix\Application\AppConfig;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
-use Twix\Container\TwixContainer;
 use Twix\Container\HTTPContainerInitializer;
+use Twix\Container\TwixContainer;
 use Twix\Events\TwixEventBus;
 use Twix\Interfaces\Application;
 use Twix\Interfaces\Container;
@@ -26,7 +26,9 @@ final class Twix
             $container = new TwixContainer();
             $container
                 ->singleton(Container::class, fn () => $container)
-                ->singleton(AppConfig::class, fn () => new AppConfig(
+                ->singleton(
+                    AppConfig::class,
+                    fn () => new AppConfig(
                         twixRoot: realpath(__DIR__),
                         root: realpath($rootDir),
                         env: env('ENVIRONMENT', 'dev')

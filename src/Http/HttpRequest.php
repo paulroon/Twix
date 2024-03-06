@@ -11,7 +11,8 @@ final readonly class HttpRequest implements Request
         private string $uri,
         private array $body = [],
         private array $headers = [],
-    ) {}
+    ) {
+    }
 
     public function getMethod(): Method
     {
@@ -32,5 +33,4 @@ final readonly class HttpRequest implements Request
     {
         return $this->headers;
     }
-
 }

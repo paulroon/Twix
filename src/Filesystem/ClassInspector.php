@@ -28,6 +28,7 @@ final readonly class ClassInspector
                 return true;
             }
         }
+
         return false;
     }
 }

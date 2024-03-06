@@ -4,5 +4,4 @@ namespace Twix\Interfaces;
 
 interface Event
 {
-
 }
