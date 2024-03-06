@@ -111,6 +111,9 @@ class TwixLoggerTest extends TestCase
         $this->assertEquals($logLevel, $logItem->getLevel()); // default
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function testStack()
     {
         /** @var TwixLogger $logger */
