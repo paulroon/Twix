@@ -16,5 +16,6 @@ COPY ../../app ./app
 COPY ../../src ./src
 COPY ../../tests ./tests
 COPY ../../.env.example ./.env
+COPY ../../.php-cs-fixer.dist.php ./.php-cs-fixer.php
 
 RUN composer dump-autoload --optimize
