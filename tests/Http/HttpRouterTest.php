@@ -3,15 +3,40 @@
 namespace Twix\Test\Http;
 
 use Twix\Exceptions\ContainerException;
+use Twix\Http\Get;
 use Twix\Http\HttpRequest;
+use Twix\Http\HttpResponse;
 use Twix\Http\HttpRouter;
 use Twix\Http\Method;
+use Twix\Http\RouterConfig;
 use Twix\Http\Status;
+use Twix\Interfaces\Container;
 use Twix\Interfaces\Router;
 use Twix\Test\TestCase;
 
 class HttpRouterTest extends TestCase
 {
+    /**
+     * @throws ContainerException
+     */
+    public function setup(): void
+    {
+        parent::setup();
+        $this->container->singleton(
+            RouterConfig::class,
+            fn () => new RouterConfig(
+                controller: [
+                    Fixtures\TestController::class,
+                ]
+            )
+        );
+
+        $this->container->singleton(
+            Router::class,
+            fn (Container $container) => new HttpRouter($container, $container->get(RouterConfig::class))
+        );
+    }
+
     /**
      * @test
      * @throws ContainerException
@@ -91,3 +116,5 @@ class HttpRouterTest extends TestCase
         $this->assertSame("Hello freddy, here's a mug!", $response->getBody());
     }
 }
+
+

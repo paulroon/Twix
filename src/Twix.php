@@ -12,6 +12,8 @@ use Twix\Events\TwixEventBus;
 use Twix\Interfaces\Application;
 use Twix\Interfaces\Container;
 use Twix\Interfaces\EventBus;
+use Twix\Interfaces\Logger;
+use Twix\Logger\TwixLogger;
 
 final class Twix
 {
@@ -34,7 +36,8 @@ final class Twix
                         env: env('ENVIRONMENT', 'dev')
                     )
                 )
-                ->singleton(EventBus::class, fn () => new TwixEventBus());
+                ->singleton(EventBus::class, fn () => new TwixEventBus())
+                ->singleton(Logger::class, fn () => new TwixLogger());
 
             self::$kernel = new Kernel($container);
 
