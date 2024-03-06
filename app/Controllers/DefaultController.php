@@ -21,7 +21,7 @@ final readonly class DefaultController
         $env = Twix::getContainer()->get(AppConfig::class)->getEnv();
 
 
-//        throw new Exception('My Application Error');
+        //        throw new Exception('My Application Error');
 
         return new HttpResponse(Status::HTTP_200, sprintf("[%s] Homepage!", $env));
     }
@@ -31,5 +31,4 @@ final readonly class DefaultController
     {
         return new HttpResponse(Status::HTTP_200, sprintf("Hello %s!", $message));
     }
-
 }

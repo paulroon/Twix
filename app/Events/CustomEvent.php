@@ -6,5 +6,4 @@ use Twix\Interfaces\Event;
 
 final readonly class CustomEvent implements Event
 {
-
 }
