@@ -75,10 +75,4 @@ final readonly class ClassFinder
         }
     }
 
-    //    public static function findPhpFilesInDir(string $path): RegexIterator
-    //    {
-    //        $directoryIterator = new RecursiveDirectoryIterator($path);
-    //        $iterator = new RecursiveIteratorIterator($directoryIterator);
-    //        return new RegexIterator($iterator, '/\.php$/');
-    //    }
 }
