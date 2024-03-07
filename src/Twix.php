@@ -10,7 +10,6 @@ use Twix\Application\TwixClassRegistry;
 use Twix\Container\HTTPContainerInitializer;
 use Twix\Container\TwixContainer;
 use Twix\Events\TwixEventBus;
-use Twix\Exceptions\ContainerException;
 use Twix\Interfaces\Application;
 use Twix\Interfaces\ClassRegistry;
 use Twix\Interfaces\Container;
@@ -22,31 +21,35 @@ final class Twix
 {
     public static Kernel $kernel;
 
-    /**
-     * @throws ContainerException
-     */
     public static function boot(string $rootDir): Twix
     {
-        $dotenv = Dotenv::createUnsafeImmutable($rootDir);
-        $dotenv->safeLoad();
+        try {
+            $dotenv = Dotenv::createUnsafeImmutable($rootDir);
+            $dotenv->safeLoad();
 
-        $container = new TwixContainer();
-        $container
-            ->singleton(Container::class, fn () => $container)
-            ->singleton(
-                AppConfig::class,
-                fn () => new AppConfig(
-                    twixRoot: realpath(__DIR__),
-                    root: realpath($rootDir),
-                    env: env('ENVIRONMENT', 'dev'),
-                    appDir: env('APPDIR', 'app')
+            $container = new TwixContainer();
+            $container
+                ->singleton(Container::class, fn () => $container)
+                ->singleton(
+                    AppConfig::class,
+                    fn () => new AppConfig(
+                        twixRoot: realpath(__DIR__),
+                        root: realpath($rootDir),
+                        env: env('ENVIRONMENT', 'dev'),
+                        appDir: env('APPDIR', 'app')
+                    )
                 )
-            )
-            ->singleton(ClassRegistry::class, fn () => new TwixClassRegistry())
-            ->singleton(EventBus::class, fn () => new TwixEventBus())
-            ->singleton(Logger::class, fn () => new TwixLogger());
+                ->singleton(ClassRegistry::class, fn () => new TwixClassRegistry())
+                ->singleton(EventBus::class, fn () => new TwixEventBus())
+                ->singleton(Logger::class, fn () => new TwixLogger());
 
-        self::$kernel = new Kernel($container);
+            self::$kernel = new Kernel($container);
+
+        } catch (\Throwable $e) {
+            // Fatal Error during Boot sequence
+            echo "Twix Boot Error:: could not load";
+            exit;
+        }
 
         return new self();
     }
