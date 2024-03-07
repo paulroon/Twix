@@ -64,7 +64,7 @@ final readonly class ClassFinder
         return $files;
     }
 
-    private static function globRecursive(string $pattern, array &$files)
+    private static function globRecursive(string $pattern, array &$files): void
     {
         foreach (glob($pattern) as $file) {
             $files[] = $file;
