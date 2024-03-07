@@ -45,7 +45,7 @@ final readonly class HTTPContainerInitializer
         $container->singleton(
             RouterConfig::class,
             fn () => new RouterConfig(
-                controller: array_map(fn (array $routeConfig) => $routeConfig['class'], $routeFiltererRegister)
+                controller: array_unique(array_map(fn (array $routeConfig) => $routeConfig['class'], $routeFiltererRegister))
             )
         );
 

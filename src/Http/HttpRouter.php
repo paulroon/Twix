@@ -24,28 +24,32 @@ final readonly class HttpRouter implements Router
         foreach ($this->routerConfig->controller as $controllerClass) {
             $reflectionClass = new \ReflectionClass($controllerClass);
 
-            foreach ($reflectionClass->getMethods() as $method) {
-                $attribute = $method->getAttributes(Route::class, \ReflectionAttribute::IS_INSTANCEOF)[0] ?? null;
+            foreach ($reflectionClass->getMethods() as $reflectionMethod) {
 
-                if (! $attribute) {
+                $attributes = $reflectionMethod->getAttributes(Route::class, \ReflectionAttribute::IS_INSTANCEOF) ?? null;
+
+                if (! $attributes) {
                     continue;
                 }
 
-                /** @var Route $route */
-                $route = $attribute->newInstance();
-                if ($route->method !== $request->getMethod()) {
-                    continue;
+                foreach ($attributes as $attribute) {
+                    /** @var Route $route */
+                    $route = $attribute->newInstance();
+
+                    if ($route->method->name === $request->getMethod()->name) {
+
+                        $params = $this->resolveParams($route->uri, $request->getUri());
+
+                        if (count($params) < 1 && $route->uri !== $request->getUri()) {
+                            continue;
+                        }
+
+                        $controller = $this->container->get($controllerClass);
+
+                        return $controller->{$reflectionMethod->getName()}(...$params);
+                    }
                 }
 
-                $params = $this->resolveParams($route->uri, $request->getUri());
-
-                if (count($params) < 1 && $route->uri !== $request->getUri()) {
-                    continue;
-                }
-
-                $controller = $this->container->get($controllerClass);
-
-                return $controller->{$method->getName()}(...$params);
             }
         }
 
