@@ -8,6 +8,7 @@ final readonly class AppConfig
         private readonly string $twixRoot,
         private readonly string $root,
         private readonly string $env,
+        private readonly string $appDir,
     ) {
     }
 
@@ -24,5 +25,19 @@ final readonly class AppConfig
     public function getRoot(): string
     {
         return $this->root;
+    }
+
+    public function getAppDir(): string
+    {
+        return $this->appDir;
+    }
+
+    public function getAppPath(): string
+    {
+        return sprintf(
+            "%s/%s",
+            $this->getRoot(),
+            $this->getAppDir()
+        );
     }
 }

@@ -6,6 +6,7 @@ use Exception;
 use Twix\Application\AppConfig;
 use Twix\Http\Get;
 use Twix\Http\HttpResponse;
+use Twix\Http\Post;
 use Twix\Http\Status;
 use Twix\Interfaces\Logger;
 use Twix\Interfaces\Response;
@@ -28,6 +29,7 @@ final readonly class DefaultController
         return new HttpResponse(Status::HTTP_200, sprintf("[%s] Homepage!", $env));
     }
 
+    #[Post('/welcome/{message}')]
     #[Get('/welcome/{message}')]
     public function show(string $message): Response
     {

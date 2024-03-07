@@ -16,6 +16,12 @@ use Twix\Twix;
 
 final readonly class HttpLifecycle
 {
+    #[Handler(ApplicationBootEvent::class)]
+    public function handleApplicationBoot(ApplicationBootEvent $applicationBootEvent): void
+    {
+        // leave this for the App to handle
+    }
+
     #[Handler(HttpRequestEvent::class)]
     public function handleRequest(HttpRequestEvent $requestEvent): void
     {

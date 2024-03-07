@@ -3,6 +3,7 @@
 namespace Twix\Application;
 
 use Throwable;
+use Twix\Events\ApplicationBootEvent;
 use Twix\Events\HttpControllerEvent;
 use Twix\Events\HttpErrorResponse;
 use Twix\Events\HttpRequestEvent;
@@ -22,6 +23,9 @@ final readonly class HttpApplication implements Application
 
     public function run(): void
     {
+        // Boot Application
+        $this->container->get(EventBus::class)->dispatch(new ApplicationBootEvent());
+
         // pre-controller event
         $this->container->get(EventBus::class)->dispatch(new HttpRequestEvent());
 

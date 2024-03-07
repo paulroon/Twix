@@ -9,12 +9,16 @@ use Twix\Application\AppConfig;
 use Twix\Application\Boot;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
+use Twix\Application\TwixClassRegistry;
 use Twix\Container\HTTPContainerInitializer;
 use Twix\Container\TwixContainer;
 use Twix\Events\TwixEventBus;
+use Twix\Exceptions\ContainerException;
 use Twix\Filesystem\ClassFinder;
 use Twix\Filesystem\ClassInspector;
+use Twix\Http\Get;
 use Twix\Interfaces\Application;
+use Twix\Interfaces\ClassRegistry;
 use Twix\Interfaces\Container;
 use Twix\Interfaces\EventBus;
 use Twix\Interfaces\Logger;
@@ -24,65 +28,33 @@ final class Twix
 {
     public static Kernel $kernel;
 
+    /**
+     * @throws ContainerException
+     */
     public static function boot(string $rootDir): Twix
     {
-        try {
-            $dotenv = Dotenv::createUnsafeImmutable($rootDir);
-            $dotenv->safeLoad();
+        $dotenv = Dotenv::createUnsafeImmutable($rootDir);
+        $dotenv->safeLoad();
 
-            $container = new TwixContainer();
-            $container
-                ->singleton(Container::class, fn () => $container)
-                ->singleton(
-                    AppConfig::class,
-                    fn () => new AppConfig(
-                        twixRoot: realpath(__DIR__),
-                        root: realpath($rootDir),
-                        env: env('ENVIRONMENT', 'dev')
-                    )
+        $container = new TwixContainer();
+        $container
+            ->singleton(Container::class, fn () => $container)
+            ->singleton(
+                AppConfig::class,
+                fn () => new AppConfig(
+                    twixRoot: realpath(__DIR__),
+                    root: realpath($rootDir),
+                    env: env('ENVIRONMENT', 'dev'),
+                    appDir: env('APPDIR', 'app')
                 )
-                ->singleton(EventBus::class, fn () => new TwixEventBus())
-                ->singleton(Logger::class, fn () => new TwixLogger());
+            )
+            ->singleton(ClassRegistry::class, fn () => new TwixClassRegistry())
+            ->singleton(EventBus::class, fn () => new TwixEventBus())
+            ->singleton(Logger::class, fn () => new TwixLogger());
 
-            self::bootstrapApplication(realpath($rootDir), $container);
-
-            self::$kernel = new Kernel($container);
-
-        } catch (\Throwable $e) {
-            // handle
-        }
+        self::$kernel = new Kernel($container);
 
         return new self();
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    private static function bootstrapApplication(string $rootPath, Container &$container): void
-    {
-        $appClasses = ClassFinder::findClassesInDir($rootPath . '/app');
-
-        $bootstrapClasses = array_filter(
-            $appClasses,
-            fn (string $controllerClass) => ClassInspector::HasMethodWithAttribute($controllerClass, [
-                Boot::class,
-            ])
-        );
-
-        foreach ($bootstrapClasses as $bootClass) {
-            $reflectionClass = new ReflectionClass($bootClass);
-            foreach ($reflectionClass->getMethods() as $reflectionMethod) {
-                $reflectionHandlerAttributes = $reflectionMethod->getAttributes(Boot::class);
-
-                foreach($reflectionHandlerAttributes as $attribute) {
-                    if ($attribute->getName() === Boot::class) {
-                        $bootClass = $container->get($reflectionMethod->getDeclaringClass()->getName());
-                        $reflectionMethod->invoke($bootClass);
-                    }
-                }
-
-            }
-        }
     }
 
     public function http(): HttpApplication

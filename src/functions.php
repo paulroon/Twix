@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Twix {
 
+    use Twix\Exceptions\ContainerException;
+
     function env(string $key, mixed $default = null): mixed
     {
         $value = getenv($key);
@@ -21,6 +23,9 @@ namespace Twix {
     }
 
 
+    /**
+     * @throws ContainerException
+     */
     function runHttpApp(string $appRoot): void
     {
         $application = Twix::boot($appRoot)->http();
