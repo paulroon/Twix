@@ -38,7 +38,7 @@ class TwixLoggerTest extends TestCase
     {
         /** @var TwixLogger $logger */
         $logger = $this->container->get(Logger::class);
-        $logger->log("I am a message");
+        $logger->log('I am a message');
 
         $stack = $logger->getLogStack();
         $stackValues = array_values($stack); // they are assoc indexed with timestamps - zero this out
@@ -46,7 +46,7 @@ class TwixLoggerTest extends TestCase
         $this->assertCount(1, $stack);
 
         $logItem = $stackValues[0];
-        $this->assertEquals("I am a message", $logItem->getMessage());
+        $this->assertEquals('I am a message', $logItem->getMessage());
         $this->assertEquals(LogLevel::INFO, $logItem->getLevel()); // default
     }
 
@@ -58,7 +58,7 @@ class TwixLoggerTest extends TestCase
         /** @var TwixLogger $logger */
         $logger = $this->container->get(Logger::class);
 
-        $logItem = new LogItem(LogLevel::INFO, "Pre-Constructed");
+        $logItem = new LogItem(LogLevel::INFO, 'Pre-Constructed');
         $logger->log($logItem);
 
         $stack = $logger->getLogStack();
@@ -67,7 +67,7 @@ class TwixLoggerTest extends TestCase
         $this->assertCount(1, $stack);
 
         $logItem = $stackValues[0];
-        $this->assertEquals("Pre-Constructed", $logItem->getMessage());
+        $this->assertEquals('Pre-Constructed', $logItem->getMessage());
         $this->assertEquals(LogLevel::INFO, $logItem->getLevel()); // default
     }
 
@@ -118,13 +118,13 @@ class TwixLoggerTest extends TestCase
         /** @var TwixLogger $logger */
         $logger = $this->container->get(Logger::class);
 
-        $logger->debug("debug Message");
+        $logger->debug('debug Message');
 
         $this->assertCount(1, $logger->getLogStack());
 
-        $logger->info("info Message");
-        $logger->emergency("emergency Message");
-        $logger->alert("alert Message");
+        $logger->info('info Message');
+        $logger->emergency('emergency Message');
+        $logger->alert('alert Message');
 
         $this->assertCount(4, $logger->getLogStack());
 

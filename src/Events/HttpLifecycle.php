@@ -77,7 +77,7 @@ final readonly class HttpLifecycle
 
             $httpErrorResponse = new HttpResponse(
                 status: $httpErrorResponse->getHttpErrorStatus(),
-                body: $httpErrorResponse->getThrowable()?->getMessage() ?? "Error",
+                body: $httpErrorResponse->getThrowable()?->getMessage() ?? 'Error',
                 headers: []
             );
 

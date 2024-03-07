@@ -25,7 +25,7 @@ final readonly class CustomHandlers
 
         $httpErrorResponse = new HttpResponse(
             status: Status::HTTP_404,
-            body: "Custom:: " . $throwable->getMessage(),
+            body: 'Custom:: ' . $throwable->getMessage(),
             headers: []
         );
 

@@ -52,7 +52,7 @@ class HttpRouterTest extends TestCase
 
         $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
-        $this->assertSame("Hello World!", $response->getBody());
+        $this->assertSame('Hello World!', $response->getBody());
     }
 
     /**
@@ -91,7 +91,7 @@ class HttpRouterTest extends TestCase
 
         $this->assertSame($router::class, HttpRouter::class);
         $this->assertSame(Status::HTTP_200, $response->getStatus());
-        $this->assertSame("Hello freddy!", $response->getBody());
+        $this->assertSame('Hello freddy!', $response->getBody());
     }
 
     /**

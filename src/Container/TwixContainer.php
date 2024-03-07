@@ -77,7 +77,7 @@ final class TwixContainer implements Container
                     if (! $dependencyClassName) {
                         $paramName = $cParam->getName();
 
-                        throw new ContainerException(sprintf("Cannot Autowire %s:: Dependency [%s] has no class type definition.", $classname, $paramName));
+                        throw new ContainerException(sprintf('Cannot Autowire %s:: Dependency [%s] has no class type definition.', $classname, $paramName));
                     }
 
                     return $this->get($dependencyClassName);
@@ -87,7 +87,7 @@ final class TwixContainer implements Container
 
             return fn () => new $classname(...$constructorParams);
         } catch (ReflectionException $e) {
-            throw new ContainerException(sprintf("There was a problem with autowire inspection for class %s", $classname));
+            throw new ContainerException(sprintf('There was a problem with autowire inspection for class %s', $classname));
         }
 
     }

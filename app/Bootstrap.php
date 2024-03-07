@@ -13,7 +13,7 @@ final readonly class Bootstrap
     #[Handler(ApplicationBootEvent::class)]
     public function bootstrap(): void
     {
-        Twix::getContainer()->get(Logger::class)->debug("Bootstrapping Application");
+        Twix::getContainer()->get(Logger::class)->debug('Bootstrapping Application');
     }
 
     #[Handler(HttpErrorResponse::class)]

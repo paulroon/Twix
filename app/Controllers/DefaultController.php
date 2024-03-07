@@ -22,17 +22,17 @@ final readonly class DefaultController
     {
         $env = Twix::getContainer()->get(AppConfig::class)->getEnv();
 
-        Twix::getContainer()->get(Logger::class)->critical("hello from the controller");
+        Twix::getContainer()->get(Logger::class)->critical('hello from the controller');
 
         // throw new Exception('My Application Error!!');
 
-        return new HttpResponse(Status::HTTP_200, sprintf("[%s] Homepage!", $env));
+        return new HttpResponse(Status::HTTP_200, sprintf('[%s] Homepage!', $env));
     }
 
     #[Post('/welcome/{message}')]
     #[Get('/welcome/{message}')]
     public function show(string $message): Response
     {
-        return new HttpResponse(Status::HTTP_200, sprintf("Hello %s!", $message));
+        return new HttpResponse(Status::HTTP_200, sprintf('Hello %s!', $message));
     }
 }

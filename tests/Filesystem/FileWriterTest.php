@@ -29,7 +29,7 @@ class FileWriterTest extends TestCase
     public function testWrite()
     {
         $writer = new FileWriter(self::TEST_PATH, self::TEST_FILENAME);
-        $text = "Oh Hello!" . PHP_EOL;
+        $text = 'Oh Hello!' . PHP_EOL;
         $bytesWritten = $writer->write($text);
 
         $this->assertEquals(strlen($text), $bytesWritten);
@@ -40,7 +40,7 @@ class FileWriterTest extends TestCase
     public function testLastBytesWrittenCount()
     {
         $writer = new FileWriter(self::TEST_PATH, self::TEST_FILENAME);
-        $text = "Oh Hello!" . PHP_EOL;
+        $text = 'Oh Hello!' . PHP_EOL;
         $writer->write($text);
 
         $this->assertEquals(strlen($text), $writer->getLastWriteBytes());

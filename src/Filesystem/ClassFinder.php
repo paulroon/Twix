@@ -40,7 +40,7 @@ final readonly class ClassFinder
 
 
                     for ($j = $index + 1; $j < count($tokens); $j++) {
-                        if ($tokens[$j] === '{' && $tokens[$index - 1][1] !== "::") {
+                        if ($tokens[$j] === '{' && $tokens[$index - 1][1] !== '::') {
                             $className = $tokens[$index + 2][1];
                             $classes[] = ltrim($namespace . '\\' . $className, '\\');
 

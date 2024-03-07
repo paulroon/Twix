@@ -12,13 +12,13 @@ final readonly class TestController
     #[Get('/')]
     public function index(): Response
     {
-        return new HttpResponse(Status::HTTP_200, "Hello World!");
+        return new HttpResponse(Status::HTTP_200, 'Hello World!');
     }
 
     #[Get('/greet/{name}')]
     public function show(string $name): Response
     {
-        return new HttpResponse(Status::HTTP_200, sprintf("Hello %s!", $name));
+        return new HttpResponse(Status::HTTP_200, sprintf('Hello %s!', $name));
     }
 
     #[Get('/greet/{name}/with/{thing}')]

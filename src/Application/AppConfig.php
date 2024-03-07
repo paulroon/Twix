@@ -35,7 +35,7 @@ final readonly class AppConfig
     public function getAppPath(): string
     {
         return sprintf(
-            "%s/%s",
+            '%s/%s',
             $this->getRoot(),
             $this->getAppDir()
         );

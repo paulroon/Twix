@@ -53,7 +53,7 @@ final readonly class HttpRouter implements Router
             }
         }
 
-        return new HttpResponse(Status::HTTP_404, "NOT FOUND");
+        return new HttpResponse(Status::HTTP_404, 'NOT FOUND');
     }
 
     public function listControllers(): array

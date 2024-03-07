@@ -37,7 +37,7 @@ final class FileWriter implements Writer
 
     public function getFullPath(): string
     {
-        return sprintf("%s%s%s", $this->path, DIRECTORY_SEPARATOR, $this->fileName);
+        return sprintf('%s%s%s', $this->path, DIRECTORY_SEPARATOR, $this->fileName);
     }
 
     public function getFileName(): string

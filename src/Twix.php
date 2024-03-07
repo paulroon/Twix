@@ -46,7 +46,7 @@ final class Twix
 
         } catch (\Throwable $e) {
             // Fatal Error during Boot sequence
-            echo "Twix Boot Error:: could not load";
+            echo 'Twix Boot Error:: could not load';
             exit;
         }
 
