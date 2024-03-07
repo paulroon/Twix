@@ -58,9 +58,9 @@ final class Twix
     /**
      * @throws ReflectionException
      */
-    private static function bootstrapApplication(string $rootpath, Container &$container): void
+    private static function bootstrapApplication(string $rootPath, Container &$container): void
     {
-        $appClasses = ClassFinder::findClassesInDir($rootpath . '/app');
+        $appClasses = ClassFinder::findClassesInDir($rootPath . '/app');
 
         $bootstrapClasses = array_filter(
             $appClasses,
