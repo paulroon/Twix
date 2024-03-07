@@ -4,14 +4,7 @@ namespace Twix\Test;
 
 use Twix\Container\TwixContainer;
 use Twix\Exceptions\ContainerException;
-use Twix\Http\Get;
-use Twix\Http\HttpResponse;
-use Twix\Http\HttpRouter;
-use Twix\Http\RouterConfig;
-use Twix\Http\Status;
 use Twix\Interfaces\Container;
-use Twix\Interfaces\Response;
-use Twix\Interfaces\Router;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
@@ -28,4 +21,3 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
     }
 }
-

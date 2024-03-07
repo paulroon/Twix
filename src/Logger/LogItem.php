@@ -12,8 +12,7 @@ final class LogItem
     public function __construct(
         private readonly LogLevel $level,
         private readonly string   $message
-    )
-    {
+    ) {
         $this->uuid = Uuid::uuid4()->toString();
         $this->time = time();
     }

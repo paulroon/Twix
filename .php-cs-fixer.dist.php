@@ -2,9 +2,9 @@
 
 $finder = Symfony\Component\Finder\Finder::create()
     ->in([
-//        __DIR__ . '/src',
+        __DIR__ . '/src',
         __DIR__ . '/app',
-//        __DIR__ . '/tests',
+        __DIR__ . '/tests',
     ])
     ->name('*.php')
     ->ignoreDotFiles(true)

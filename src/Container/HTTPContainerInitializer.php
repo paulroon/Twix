@@ -2,27 +2,18 @@
 
 namespace Twix\Container;
 
-use ReflectionClass;
 use ReflectionException;
-use Twix\Application\AppConfig;
-use Twix\Application\Boot;
 use Twix\Application\TwixClassRegistry;
 use Twix\Events\Handler;
-use Twix\Filesystem\ClassFinder;
-use Twix\Filesystem\ClassInspector;
 use Twix\Http\Get;
-use Twix\Http\HttpRequest;
 use Twix\Http\HttpRouter;
-use Twix\Http\Method;
 use Twix\Http\Post;
 use Twix\Http\Route;
 use Twix\Http\RouterConfig;
 use Twix\Interfaces\ClassRegistry;
 use Twix\Interfaces\Container;
 use Twix\Interfaces\EventBus;
-use Twix\Interfaces\Request;
 use Twix\Interfaces\Router;
-use Twix\Twix;
 
 final readonly class HTTPContainerInitializer
 {
@@ -84,5 +75,4 @@ final readonly class HTTPContainerInitializer
         }
 
     }
-
 }

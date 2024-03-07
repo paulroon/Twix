@@ -9,7 +9,6 @@ use Twix\Twix;
 
 final class TwixClassRegistry
 {
-
     private array $classRegister = [];
 
     /**
@@ -66,6 +65,7 @@ final class TwixClassRegistry
                 }
             }
         }
+
         return $attributeMethods;
     }
 

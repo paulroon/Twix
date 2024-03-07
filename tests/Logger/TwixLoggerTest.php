@@ -84,10 +84,9 @@ class TwixLoggerTest extends TestCase
             [LogLevel::ERROR, 'error'],
             [LogLevel::CRITICAL, 'critical'],
             [LogLevel::ALERT, 'alert'],
-            [LogLevel::EMERGENCY, 'emergency']
+            [LogLevel::EMERGENCY, 'emergency'],
         ];
     }
-
 
     /**
      * @dataProvider logLevelDataProvider
@@ -130,6 +129,4 @@ class TwixLoggerTest extends TestCase
         $this->assertCount(4, $logger->getLogStack());
 
     }
-
-
 }

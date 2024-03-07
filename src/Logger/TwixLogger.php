@@ -8,7 +8,7 @@ final class TwixLogger implements Logger
 {
     private LogLevel $defaultLevel;
 
-    /** @var array|LogItem[] $logStack  */
+    /** @var array|LogItem[] */
     private array $logStack = [];
 
     public function __construct()
@@ -83,8 +83,7 @@ final class TwixLogger implements Logger
         return array_map(fn (LogItem $logItem) => [
             $logItem->getLevel()->value,
             $logItem->getTime(),
-            $logItem->getMessage()
+            $logItem->getMessage(),
         ], $this->getLogStack());
     }
-
 }

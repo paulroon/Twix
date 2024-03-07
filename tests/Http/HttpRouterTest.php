@@ -3,9 +3,7 @@
 namespace Twix\Test\Http;
 
 use Twix\Exceptions\ContainerException;
-use Twix\Http\Get;
 use Twix\Http\HttpRequest;
-use Twix\Http\HttpResponse;
 use Twix\Http\HttpRouter;
 use Twix\Http\Method;
 use Twix\Http\RouterConfig;
@@ -116,5 +114,3 @@ class HttpRouterTest extends TestCase
         $this->assertSame("Hello freddy, here's a mug!", $response->getBody());
     }
 }
-
-

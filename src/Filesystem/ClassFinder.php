@@ -2,8 +2,6 @@
 
 namespace Twix\Filesystem;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use RegexIterator;
 
 final readonly class ClassFinder
@@ -74,5 +72,4 @@ final readonly class ClassFinder
             self::globRecursive($dir . '/' . basename($pattern), $files);
         }
     }
-
 }

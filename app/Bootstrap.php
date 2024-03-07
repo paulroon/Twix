@@ -2,12 +2,10 @@
 
 namespace App;
 
-use Twix\Application\Boot;
 use Twix\Events\ApplicationBootEvent;
 use Twix\Events\Handler;
 use Twix\Events\HttpErrorResponse;
 use Twix\Interfaces\Logger;
-use Twix\Interfaces\Router;
 use Twix\Twix;
 
 final readonly class Bootstrap
