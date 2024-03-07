@@ -23,7 +23,7 @@ final readonly class DefaultController
 
         Twix::getContainer()->get(Logger::class)->critical("hello from the controller");
 
-        //        throw new Exception('My Application Error');
+        // throw new Exception('My Application Error!!');
 
         return new HttpResponse(Status::HTTP_200, sprintf("[%s] Homepage!", $env));
     }
