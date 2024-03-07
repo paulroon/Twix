@@ -26,9 +26,6 @@ final class TwixEventBus implements EventBus
 
             $handler = $container->get($reflectionMethod->getDeclaringClass()->getName());
 
-            // Log Event
-            //$container->get(Logger::class)->info(sprintf("EventHandler: %s::%s(%s)", $handler::class, $reflectionMethod->getName(), $event::class));
-
             $reflectionMethod->invoke($handler, $event);
         }
     }
