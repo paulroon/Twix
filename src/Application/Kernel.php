@@ -20,9 +20,4 @@ final readonly class Kernel
     {
         return $this->container;
     }
-
-    public function getAppConfig(): AppConfig
-    {
-        return $this->container->get(AppConfig::class);
-    }
 }
