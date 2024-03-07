@@ -17,21 +17,19 @@ use Twix\Interfaces\Router;
 
 final readonly class HTTPContainerInitializer
 {
-    /**
-     * @throws ReflectionException
-     */
     public static function init(Container $container): Container
     {
-
-        self::setupRouter($container);
-        self::setupEventHandlers($container);
+        try {
+            self::setupRouter($container);
+            self::setupEventHandlers($container);
+        } catch (\Throwable) {
+            // App initialisation Error
+        }
 
         return $container;
     }
 
     /**
-     * Finds Controllers (Classes with Route attribute methods)
-     * and add them to the router
      * @throws ReflectionException
      */
     private static function setupRouter(Container &$container): void

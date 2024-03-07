@@ -7,7 +7,6 @@ use Twix\Application\AppConfig;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
 use Twix\Application\TwixClassRegistry;
-use Twix\Container\HTTPContainerInitializer;
 use Twix\Container\TwixContainer;
 use Twix\Events\TwixEventBus;
 use Twix\Interfaces\Application;
@@ -60,7 +59,7 @@ final class Twix
 
         $container->singleton(
             classname: Application::class,
-            definition: fn () => new HttpApplication(HTTPContainerInitializer::init($container))
+            definition: fn () => new HttpApplication()
         );
 
         return $container->get(Application::class);
