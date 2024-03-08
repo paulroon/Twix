@@ -29,7 +29,6 @@ final readonly class DefaultController
     {
         $env = $this->appConfig->getEnv();
 
-        $this->logger->critical('hello from the controller!!!');
 
         // throw new Exception('My Application Error!!');
 
@@ -40,10 +39,7 @@ final readonly class DefaultController
     #[Get('/welcome/{message}')]
     public function show(string $message): Response
     {
-
-
-        dd($this->request);
-
-        return new HttpResponse(Status::HTTP_200, sprintf('Hello %s!', $message));
+        $this->logger->critical('hello from the controller!!! - ');
+        return new HttpResponse(Status::HTTP_200, sprintf('Hello %s! - URL[%s]', $message, $this->request->getUri()));
     }
 }
