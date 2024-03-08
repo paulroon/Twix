@@ -6,7 +6,7 @@ use Throwable;
 use Twix\Container\HTTPContainerInitializer;
 use Twix\Events\ApplicationBootEvent;
 use Twix\Events\HttpControllerEvent;
-use Twix\Events\HttpErrorResponse;
+use Twix\Events\HttpErrorResponseEvent;
 use Twix\Events\HttpRequestEvent;
 use Twix\Events\HttpResponderEvent;
 use Twix\Events\HttpResponseEvent;
@@ -48,7 +48,7 @@ final readonly class HttpApplication implements Application
     public function handleError(Throwable $throwable): void
     {
         // Run Http Error Responder
-        $this->eventBus->dispatch(new HttpErrorResponse($throwable));
+        $this->eventBus->dispatch(new HttpErrorResponseEvent($throwable));
 
         // Run Http Responder
         $this->eventBus->dispatch(new HttpResponderEvent());

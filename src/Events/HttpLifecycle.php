@@ -87,8 +87,8 @@ final readonly class HttpLifecycle
         $httpResponder->send($httpResponse);
     }
 
-    #[Handler(HttpErrorResponse::class)]
-    public function handleErrorResponseEvent(HttpErrorResponse $httpErrorResponse): void
+    #[Handler(HttpErrorResponseEvent::class)]
+    public function handleErrorResponseEvent(HttpErrorResponseEvent $httpErrorResponse): void
     {
         $this->logger->debug(__METHOD__ . '[HttpErrorResponse]');
 

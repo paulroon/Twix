@@ -84,7 +84,6 @@ final class TwixContainer implements Container
                 },
                 $reflectionClass->getConstructor()?->getParameters() ?? []
             );
-
             return fn () => new $classname(...$constructorParams);
         } catch (ReflectionException $e) {
             throw new ContainerException(sprintf('There was a problem with autowire inspection for class %s', $classname));

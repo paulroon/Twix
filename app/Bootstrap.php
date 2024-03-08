@@ -2,10 +2,11 @@
 
 namespace App;
 
+use DateTime;
 use Twix\Application\AppConfig;
 use Twix\Events\ApplicationBootEvent;
 use Twix\Events\Handler;
-use Twix\Events\HttpErrorResponse;
+use Twix\Events\HttpErrorResponseEvent;
 use Twix\Events\LogEvent;
 use Twix\Filesystem\FileWriter;
 use Twix\Interfaces\Logger;
@@ -14,15 +15,17 @@ use Twix\Twix;
 final readonly class Bootstrap
 {
     public function __construct(
-        private readonly AppConfig $appConfig,
-        private readonly Logger $logger
+        private AppConfig  $appConfig,
+        private Logger     $logger,
+        private FileWriter $fileWriter
     ) {
     }
 
     #[Handler(ApplicationBootEvent::class)]
     public function bootstrap(): void
     {
-        $logFilePath = 'var' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . $this->appConfig->getEnv() . '.log';
+        $dt = new DateTime();
+        $logFilePath = 'var' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . $this->appConfig->getEnv() . '_' . $dt->format('Y_W') . '.log';
         Twix::getContainer()->register(
             FileWriter::class,
             fn () => new FileWriter($this->appConfig->getRoot(), $logFilePath)
@@ -31,8 +34,8 @@ final readonly class Bootstrap
 
     }
 
-    #[Handler(HttpErrorResponse::class)]
-    public function other(): void
+    #[Handler(HttpErrorResponseEvent::class)]
+    public function other(HttpErrorResponseEvent $errorResponse): void
     {
         dump(debug_backtrace());
     }
@@ -49,6 +52,6 @@ final readonly class Bootstrap
             str_pad($logEvent->getUuid(), 33, ' ', STR_PAD_RIGHT)
         );
 
-        Twix::getContainer()->get(FileWriter::class)->append($message . PHP_EOL);
+        $this->fileWriter->append($message . PHP_EOL);
     }
 }

@@ -4,7 +4,7 @@ namespace App\EventHandlers;
 
 use App\Events\CustomEvent;
 use Twix\Events\Handler;
-use Twix\Events\HttpErrorResponse;
+use Twix\Events\HttpErrorResponseEvent;
 use Twix\Http\HttpResponse;
 use Twix\Http\Status;
 use Twix\Interfaces\Response;
@@ -18,8 +18,8 @@ final readonly class CustomHandlers
         dump('handling CustomHandlers::customEventHandler()');
     }
 
-    #[Handler(HttpErrorResponse::class)]
-    public function customErrorResponseHandler(HttpErrorResponse $httpErrorResponse): void
+    #[Handler(HttpErrorResponseEvent::class)]
+    public function customErrorResponseHandler(HttpErrorResponseEvent $httpErrorResponse): void
     {
         $throwable = $httpErrorResponse->getThrowable();
 
