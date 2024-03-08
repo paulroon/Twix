@@ -3,6 +3,7 @@
 namespace Twix;
 
 use Dotenv\Dotenv;
+use Ramsey\Uuid\Uuid;
 use Twix\Application\AppConfig;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
@@ -19,10 +20,12 @@ use Twix\Logger\TwixLogger;
 final class Twix
 {
     public static Kernel $kernel;
+    private static string $threadId;
 
     public static function boot(string $rootDir): Twix
     {
         try {
+
             $dotenv = Dotenv::createUnsafeImmutable($rootDir);
             $dotenv->safeLoad();
 
@@ -35,7 +38,8 @@ final class Twix
                         twixRoot: realpath(__DIR__),
                         root: realpath($rootDir),
                         env: env('ENVIRONMENT', 'dev'),
-                        appDir: env('APPDIR', 'app')
+                        appDir: env('APPDIR', 'app'),
+                        threadId: Uuid::uuid4()->toString()
                     )
                 )
                 ->singleton(ClassRegistry::class, fn () => new TwixClassRegistry())

@@ -9,6 +9,7 @@ final readonly class AppConfig
         private readonly string $root,
         private readonly string $env,
         private readonly string $appDir,
+        private readonly string $threadId,
     ) {
     }
 
@@ -30,6 +31,11 @@ final readonly class AppConfig
     public function getAppDir(): string
     {
         return $this->appDir;
+    }
+
+    public function getThreadId(): string
+    {
+        return $this->threadId;
     }
 
     public function getAppPath(): string

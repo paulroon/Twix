@@ -14,7 +14,7 @@ final class TwixLogger implements Logger
     private array $logStack = [];
 
     public function __construct(
-        private readonly EventBus $eventBus
+        private readonly EventBus $eventBus,
     ) {
         $this->defaultLevel = LogLevel::INFO;
     }

@@ -40,6 +40,7 @@ final readonly class DefaultController
     public function show(string $message): Response
     {
         $this->logger->critical('hello from the controller!!! - ');
+
         return new HttpResponse(Status::HTTP_200, sprintf('Hello %s! - URL[%s]', $message, $this->request->getUri()));
     }
 }
