@@ -2,7 +2,6 @@
 
 namespace App;
 
-use DateTime;
 use Twix\Application\AppConfig;
 use Twix\Events\ApplicationBootEvent;
 use Twix\Events\Handler;
@@ -24,11 +23,9 @@ final readonly class Bootstrap
     #[Handler(ApplicationBootEvent::class)]
     public function bootstrap(): void
     {
-        $dt = new DateTime();
-        $logFilePath = 'var' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . $this->appConfig->getEnv() . '_' . $dt->format('Y_W') . '.log';
-        Twix::getContainer()->register(
+        Twix::getContainer()->singleton(
             FileWriter::class,
-            fn () => new FileWriter($this->appConfig->getRoot(), $logFilePath)
+            fn () => new FileWriter($this->appConfig)
         );
         $this->logger->debug('Bootstrapping Application');
 

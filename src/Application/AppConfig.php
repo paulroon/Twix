@@ -25,7 +25,7 @@ final readonly class AppConfig
 
     public function getRoot(): string
     {
-        return $this->root;
+        return realpath($this->root);
     }
 
     public function getAppDir(): string

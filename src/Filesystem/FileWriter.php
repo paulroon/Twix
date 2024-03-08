@@ -2,18 +2,27 @@
 
 namespace Twix\Filesystem;
 
+use DateTime;
+use Twix\Application\AppConfig;
 use Twix\Interfaces\Writer;
 
 final class FileWriter implements Writer
 {
     private int $lastWriteBytes = 0;
-    private readonly string $path;
+
+    private string $fileName;
 
     public function __construct(
-        string $path,
-        private readonly string $fileName
+        private readonly AppConfig $appConfig
     ) {
-        $this->path = realpath($path);
+        $logFilePath = sprintf(
+            'var%slogs%s%s_%s.log',
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            $this->appConfig->getEnv(),
+            (new DateTime())->format('Y_W')
+        );
+        $this->fileName = $logFilePath;
     }
 
     public function write(string $text): int
@@ -39,14 +48,9 @@ final class FileWriter implements Writer
         return $this->getLastWriteBytes();
     }
 
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-
     public function getFullPath(): string
     {
-        return sprintf('%s%s%s', $this->path, DIRECTORY_SEPARATOR, $this->fileName);
+        return sprintf('%s%s%s', $this->appConfig->getRoot(), DIRECTORY_SEPARATOR, $this->fileName);
     }
 
     public function getFileName(): string

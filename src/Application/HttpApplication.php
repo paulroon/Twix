@@ -31,7 +31,6 @@ final readonly class HttpApplication implements Application
 
         // pre-controller event
         $this->eventBus->dispatch(new HttpRequestEvent());
-
         // Run Controller
         $this->eventBus->dispatch(new HttpControllerEvent());
 
@@ -49,6 +48,9 @@ final readonly class HttpApplication implements Application
     {
         // Run Http Error Responder
         $this->eventBus->dispatch(new HttpErrorResponseEvent($throwable));
+
+        // Run Http Responder
+        $this->eventBus->dispatch(new HttpResponderEvent());
 
         // Run Http Responder
         $this->eventBus->dispatch(new HttpResponderEvent());
