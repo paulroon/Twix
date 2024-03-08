@@ -9,20 +9,27 @@ use Twix\Http\HttpResponse;
 use Twix\Http\Post;
 use Twix\Http\Status;
 use Twix\Interfaces\Logger;
+use Twix\Interfaces\Request;
 use Twix\Interfaces\Response;
-use Twix\Twix;
 
 final readonly class DefaultController
 {
+    public function __construct(
+        private Logger $logger,
+        private AppConfig $appConfig,
+        private readonly Request $request
+    ) {
+    }
+
     /**
      * @throws Exception
      */
     #[Get('/')]
     public function index(): Response
     {
-        $env = Twix::getContainer()->get(AppConfig::class)->getEnv();
+        $env = $this->appConfig->getEnv();
 
-        Twix::getContainer()->get(Logger::class)->critical('hello from the controller');
+        $this->logger->critical('hello from the controller!!!');
 
         // throw new Exception('My Application Error!!');
 
@@ -33,6 +40,10 @@ final readonly class DefaultController
     #[Get('/welcome/{message}')]
     public function show(string $message): Response
     {
+
+
+        dd($this->request);
+
         return new HttpResponse(Status::HTTP_200, sprintf('Hello %s!', $message));
     }
 }

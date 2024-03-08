@@ -3,7 +3,6 @@
 namespace Twix\Test\Logger;
 
 use Twix\Exceptions\ContainerException;
-use Twix\Interfaces\Container;
 use Twix\Interfaces\Logger;
 use Twix\Logger\LogItem;
 use Twix\Logger\LogLevel;
@@ -12,22 +11,6 @@ use Twix\Test\TestCase;
 
 class TwixLoggerTest extends TestCase
 {
-    /**
-     * @throws ContainerException
-     */
-    public function setup(): void
-    {
-        parent::setup();
-
-        $this->container->singleton(
-            Logger::class,
-            fn (Container $container) => new TwixLogger()
-        );
-    }
-
-    /**
-     * @throws ContainerException
-     */
     public function testLoggerFetchFromContainer()
     {
         $logger = $this->container->get(Logger::class);
@@ -50,9 +33,6 @@ class TwixLoggerTest extends TestCase
         $this->assertEquals(LogLevel::INFO, $logItem->getLevel()); // default
     }
 
-    /**
-     * @throws ContainerException
-     */
     public function testFromLogItem()
     {
         /** @var TwixLogger $logger */
@@ -110,9 +90,6 @@ class TwixLoggerTest extends TestCase
         $this->assertEquals($logLevel, $logItem->getLevel()); // default
     }
 
-    /**
-     * @throws ContainerException
-     */
     public function testStack()
     {
         /** @var TwixLogger $logger */

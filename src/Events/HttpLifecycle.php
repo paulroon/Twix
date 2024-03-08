@@ -11,11 +11,15 @@ use Twix\Interfaces\Logger;
 use Twix\Interfaces\Request;
 use Twix\Interfaces\Response;
 use Twix\Interfaces\Router;
-use Twix\Logger\TwixLogger;
 use Twix\Twix;
 
 final readonly class HttpLifecycle
 {
+    public function __construct(
+        private readonly Logger $logger
+    ) {
+    }
+
     #[Handler(ApplicationBootEvent::class)]
     public function handleApplicationBoot(ApplicationBootEvent $applicationBootEvent): void
     {
@@ -25,21 +29,37 @@ final readonly class HttpLifecycle
     #[Handler(HttpRequestEvent::class)]
     public function handleRequest(HttpRequestEvent $requestEvent): void
     {
+        $this->logger->debug(__METHOD__ . '[HttpRequestEvent]');
+
         $method = Method::tryFrom($_SERVER['REQUEST_METHOD']) ?? Method::GET;
+
+        $headers = [];
+        foreach ($_SERVER as $key => $value) {
+            if (str_starts_with($key, 'HTTP_')) {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))))] = $value;
+            }
+        }
+
         $request = new HttpRequest(
             method: $method,
             uri: $_SERVER['REQUEST_URI'] ?? '/',
             body: match($method) {
-                Method::POST => $_POST,
-                default => $_GET,
-            }
+                Method::POST => file_get_contents('php://input'),
+                default => '',
+            },
+            headers: $headers
         );
+
         Twix::getContainer()->register(Request::class, fn () => $request);
+
+        $this->logger->info($request->describe());
     }
 
     #[Handler(HttpControllerEvent::class)]
     public function handleController(HttpControllerEvent $httpControllerEvent): void
     {
+        $this->logger->debug(__METHOD__ . '[HttpControllerEvent]');
+
         $router = Twix::getContainer()->get(Router::class);
         $request = Twix::getContainer()->get(Request::class);
 
@@ -50,6 +70,8 @@ final readonly class HttpLifecycle
     #[Handler(HttpResponseEvent::class)]
     public function handleResponse(HttpResponseEvent $responseEvent): void
     {
+        $this->logger->debug(__METHOD__ . '[HttpResponseEvent]');
+
         //        $httpResponse = Twix::getContainer()->get(Response::class);
         //        $newHttpResponse = new HttpResponse(Status::HTTP_404, "DOWN FOR MAINTENANCE!!!");
         //        Twix::getContainer()->register(Response::class, fn () => $newHttpResponse);
@@ -58,6 +80,8 @@ final readonly class HttpLifecycle
     #[Handler(HttpResponderEvent::class)]
     public function handleResponderEvent(HttpResponderEvent $httpResponderEvent): void
     {
+        $this->logger->debug(__METHOD__ . '[HttpResponderEvent]');
+
         $httpResponder = Twix::getContainer()->get(HttpResponder::class);
         $httpResponse = Twix::getContainer()->get(Response::class);
         $httpResponder->send($httpResponse);
@@ -66,6 +90,8 @@ final readonly class HttpLifecycle
     #[Handler(HttpErrorResponse::class)]
     public function handleErrorResponseEvent(HttpErrorResponse $httpErrorResponse): void
     {
+        $this->logger->debug(__METHOD__ . '[HttpErrorResponse]');
+
         $container = Twix::getContainer();
         $currentResponse = $container->isRegistered(Response::class)
             ? $container->get(Response::class)
@@ -89,13 +115,6 @@ final readonly class HttpLifecycle
     #[Handler(HttpTerminationEvent::class)]
     public function handleHttpTermination(HttpTerminationEvent $terminationEvent): void
     {
-        // handle post response stuff here
-        $container = Twix::getContainer();
-
-        /** @var TwixLogger $logger */
-        $logger = $container->get(Logger::class);
-
-        dump($logger->getLog());
-
+        // $this->>logger->debug(__METHOD__ . '[HttpTerminationEvent]');
     }
 }

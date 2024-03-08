@@ -40,7 +40,7 @@ final class Twix
                 )
                 ->singleton(ClassRegistry::class, fn () => new TwixClassRegistry())
                 ->singleton(EventBus::class, fn () => new TwixEventBus())
-                ->singleton(Logger::class, fn () => new TwixLogger());
+                ->singleton(Logger::class, fn (Container $c) => new TwixLogger($c->get(EventBus::class)));
 
             self::$kernel = new Kernel($container);
 
@@ -59,7 +59,7 @@ final class Twix
 
         $container->singleton(
             classname: Application::class,
-            definition: fn () => new HttpApplication()
+            definition: fn () => new HttpApplication($container, $container->get(EventBus::class))
         );
 
         return $container->get(Application::class);

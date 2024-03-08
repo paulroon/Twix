@@ -6,7 +6,6 @@ use ReflectionException;
 use ReflectionMethod;
 use Twix\Interfaces\Event;
 use Twix\Interfaces\EventBus;
-use Twix\Interfaces\Logger;
 use Twix\Twix;
 
 final class TwixEventBus implements EventBus

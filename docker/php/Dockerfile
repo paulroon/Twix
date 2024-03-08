@@ -4,6 +4,11 @@ WORKDIR /www
 
 RUN docker-php-ext-install pdo
 
+# Set directory permissions
+RUN mkdir -p var && \
+    chown -R www-data:www-data var && \
+    chmod -R 775 var
+
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer

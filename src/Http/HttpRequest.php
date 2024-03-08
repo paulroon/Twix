@@ -9,7 +9,7 @@ final readonly class HttpRequest implements Request
     public function __construct(
         private Method $method,
         private string $uri,
-        private array $body = [],
+        private string $body = '',
         private array $headers = [],
     ) {
     }
@@ -24,7 +24,7 @@ final readonly class HttpRequest implements Request
         return $this->uri;
     }
 
-    public function getBody(): array
+    public function getBody(): string
     {
         return $this->body;
     }
@@ -32,5 +32,20 @@ final readonly class HttpRequest implements Request
     public function getHeaders(): array
     {
         return $this->headers;
+    }
+
+    public function getHeader(string $key = null): string
+    {
+        return $this->headers[$key] ?? '';
+    }
+
+    public function describe(): string
+    {
+        return sprintf('%s %s [%s]', $this->getMethod()->value, $this->getUri(), $this->getBody());
+    }
+
+    public function isJson()
+    {
+
     }
 }

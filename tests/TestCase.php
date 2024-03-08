@@ -2,9 +2,11 @@
 
 namespace Twix\Test;
 
-use Twix\Container\TwixContainer;
+use Twix\Events\TwixEventBus;
 use Twix\Exceptions\ContainerException;
 use Twix\Interfaces\Container;
+use Twix\Interfaces\EventBus;
+use Twix\Twix;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
@@ -15,9 +17,11 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function setup(): void
     {
-        $this->container = new TwixContainer();
+        Twix::boot(__DIR__ . '../');
+        $this->container = Twix::getContainer();
 
-        $this->container->singleton(Container::class, fn () => $this->container);
+        //        $this->container->singleton(Container::class, fn () => $this->container);
+        //        $this->container->singleton(EventBus::class, fn () => new TwixEventBus());
 
     }
 }

@@ -18,13 +18,22 @@ final class FileWriter implements Writer
 
     public function write(string $text): int
     {
-        $this->lastWriteBytes = file_put_contents($this->getFullPath(), $text) ?? 0;
+        $fPath = $this->getFullPath();
+
+        if (! is_dir(dirname($fPath))) {
+            mkdir(dirname($fPath), 0755, true);
+        }
+
+        $this->lastWriteBytes = file_put_contents($fPath, $text) ?? 0;
 
         return $this->getLastWriteBytes();
     }
 
     public function append(string $text): int
     {
+        if (! is_dir(dirname($this->getFullPath()))) {
+            return $this->write($text);
+        }
         $this->lastWriteBytes = file_put_contents($this->getFullPath(), $text, FILE_APPEND) ?? 0;
 
         return $this->getLastWriteBytes();

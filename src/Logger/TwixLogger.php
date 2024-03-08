@@ -2,6 +2,8 @@
 
 namespace Twix\Logger;
 
+use Twix\Events\LogEvent;
+use Twix\Interfaces\EventBus;
 use Twix\Interfaces\Logger;
 
 final class TwixLogger implements Logger
@@ -11,8 +13,9 @@ final class TwixLogger implements Logger
     /** @var array|LogItem[] */
     private array $logStack = [];
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly EventBus $eventBus
+    ) {
         $this->defaultLevel = LogLevel::INFO;
     }
 
@@ -22,6 +25,8 @@ final class TwixLogger implements Logger
             ? $message
             : new LogItem($this->defaultLevel, $message);
 
+
+        $this->eventBus->dispatch(LogEvent::From($logItem));
         $this->logStack[$logItem->getUuid()] = $logItem;
     }
 
