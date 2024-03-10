@@ -77,7 +77,7 @@ final class TwixContainer implements Container
 
                     $dependencyClassName = $cParam->getType()?->getName();
 
-                    if (!$paramType ||$cParam->getType()->isBuiltin() || ! $dependencyClassName) {
+                    if (! $paramType || $cParam->getType()->isBuiltin() || ! $dependencyClassName) {
                         throw new ContainerException(sprintf('Cannot Autowire %s:: Dependency [%s] has no class type definition.', $reflectionClass->getName(), $cParam->getName()));
                     }
 

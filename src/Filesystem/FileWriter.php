@@ -27,8 +27,6 @@ final class FileWriter implements Writer
         $this->fileName = $logFilePath;
     }
 
-
-
     public function write(string $text): int
     {
         if (! is_dir(dirname($this->fileName))) {
@@ -64,6 +62,7 @@ final class FileWriter implements Writer
     public function setFileName(string $fileName): self
     {
         $this->fileName = $fileName;
+
         return $this;
     }
 }

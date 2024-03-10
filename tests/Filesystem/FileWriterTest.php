@@ -2,7 +2,6 @@
 
 namespace Twix\Test\Filesystem;
 
-use Twix\Twix;
 use Twix\Application\AppConfig;
 use Twix\Filesystem\FileWriter;
 use Twix\Test\TestCase;
@@ -19,7 +18,7 @@ class FileWriterTest extends TestCase
     {
         parent::setup();
         $dirPath = realpath(self::TEST_PATH);
-        $this->filePath = sprintf("%s%s%s", $dirPath, DIRECTORY_SEPARATOR, self::TEST_FILENAME);
+        $this->filePath = sprintf('%s%s%s', $dirPath, DIRECTORY_SEPARATOR, self::TEST_FILENAME);
         if (! file_exists($dirPath)) {
             mkdir($dirPath, 0777, true);
         }

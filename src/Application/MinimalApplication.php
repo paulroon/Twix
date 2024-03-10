@@ -15,5 +15,6 @@ final readonly class MinimalApplication implements Application
     }
 
     public function run(): void
-    {}
+    {
+    }
 }

@@ -13,7 +13,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         Twix::boot(__DIR__ . '../', [
             'env' => 'test',
-            'appDir' => 'tests'
+            'appDir' => 'tests',
         ])->minimal()->run();
         $this->container = Twix::getContainer();
     }
