@@ -8,7 +8,10 @@ use Twix\Events\Handler;
 use Twix\Events\HttpErrorResponseEvent;
 use Twix\Events\LogEvent;
 use Twix\Filesystem\FileWriter;
+use Twix\Http\HttpResponse;
+use Twix\Http\Status;
 use Twix\Interfaces\Logger;
+use Twix\Interfaces\Response;
 use Twix\Twix;
 
 final readonly class Bootstrap
@@ -32,9 +35,17 @@ final readonly class Bootstrap
     }
 
     #[Handler(HttpErrorResponseEvent::class)]
-    public function other(HttpErrorResponseEvent $errorResponse): void
+    public function customErrorResponseHandler(HttpErrorResponseEvent $httpErrorResponse): void
     {
-        dump(debug_backtrace());
+        $throwable = $httpErrorResponse->getThrowable();
+
+        $httpErrorResponse = new HttpResponse(
+            status: Status::HTTP_404,
+            body: 'Custom:: ' . $throwable->getMessage(),
+            headers: []
+        );
+
+        Twix::getContainer()->register(Response::class, fn () => $httpErrorResponse);
     }
 
     #[Handler(LogEvent::class)]

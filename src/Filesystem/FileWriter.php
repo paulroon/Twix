@@ -16,7 +16,9 @@ final class FileWriter implements Writer
         private readonly AppConfig $appConfig
     ) {
         $logFilePath = sprintf(
-            'var%slogs%s%s_%s.log',
+            '%s%svar%slogs%s%s_%s.log',
+            $this->appConfig->getRoot(),
+            DIRECTORY_SEPARATOR,
             DIRECTORY_SEPARATOR,
             DIRECTORY_SEPARATOR,
             $this->appConfig->getEnv(),
@@ -25,32 +27,28 @@ final class FileWriter implements Writer
         $this->fileName = $logFilePath;
     }
 
+
+
     public function write(string $text): int
     {
-        $fPath = $this->getFullPath();
-
-        if (! is_dir(dirname($fPath))) {
-            mkdir(dirname($fPath), 0755, true);
+        if (! is_dir(dirname($this->fileName))) {
+            mkdir(dirname($this->fileName), 0755, true);
         }
 
-        $this->lastWriteBytes = file_put_contents($fPath, $text) ?? 0;
+        $this->lastWriteBytes = file_put_contents($this->fileName, $text) ?? 0;
 
         return $this->getLastWriteBytes();
     }
 
     public function append(string $text): int
     {
-        if (! is_dir(dirname($this->getFullPath()))) {
+        if (! is_dir(dirname($this->fileName))) {
             return $this->write($text);
         }
-        $this->lastWriteBytes = file_put_contents($this->getFullPath(), $text, FILE_APPEND) ?? 0;
+
+        $this->lastWriteBytes = file_put_contents($this->fileName, $text, FILE_APPEND) ?? 0;
 
         return $this->getLastWriteBytes();
-    }
-
-    public function getFullPath(): string
-    {
-        return sprintf('%s%s%s', $this->appConfig->getRoot(), DIRECTORY_SEPARATOR, $this->fileName);
     }
 
     public function getFileName(): string
@@ -61,5 +59,11 @@ final class FileWriter implements Writer
     public function getLastWriteBytes(): int
     {
         return $this->lastWriteBytes;
+    }
+
+    public function setFileName(string $fileName): self
+    {
+        $this->fileName = $fileName;
+        return $this;
     }
 }

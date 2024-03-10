@@ -2,7 +2,6 @@
 
 namespace Twix\Test\Http;
 
-use Twix\Exceptions\ContainerException;
 use Twix\Http\HttpRequest;
 use Twix\Http\HttpRouter;
 use Twix\Http\Method;
@@ -14,9 +13,6 @@ use Twix\Test\TestCase;
 
 class HttpRouterTest extends TestCase
 {
-    /**
-     * @throws ContainerException
-     */
     public function setup(): void
     {
         parent::setup();
@@ -37,7 +33,6 @@ class HttpRouterTest extends TestCase
 
     /**
      * @test
-     * @throws ContainerException
      */
     public function testRouterBasicRoute()
     {
@@ -57,7 +52,6 @@ class HttpRouterTest extends TestCase
 
     /**
      * @test
-     * @throws ContainerException
      */
     public function testRouterWithMissingRoute()
     {
@@ -76,7 +70,6 @@ class HttpRouterTest extends TestCase
 
     /**
      * @test
-     * @throws ContainerException
      */
     public function testRouterWithParams()
     {
@@ -96,7 +89,6 @@ class HttpRouterTest extends TestCase
 
     /**
      * @test
-     * @throws ContainerException
      */
     public function testRouterWithMultipleParams()
     {

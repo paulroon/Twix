@@ -7,6 +7,7 @@ use Ramsey\Uuid\Uuid;
 use Twix\Application\AppConfig;
 use Twix\Application\HttpApplication;
 use Twix\Application\Kernel;
+use Twix\Application\MinimalApplication;
 use Twix\Application\TwixClassRegistry;
 use Twix\Container\TwixContainer;
 use Twix\Events\TwixEventBus;
@@ -20,9 +21,8 @@ use Twix\Logger\TwixLogger;
 final class Twix
 {
     public static Kernel $kernel;
-    private static string $threadId;
 
-    public static function boot(string $rootDir): Twix
+    public static function boot(string $rootDir, array $options = [ 'env' => 'dev', 'appDir' => 'app' ]): Twix
     {
         try {
 
@@ -37,8 +37,8 @@ final class Twix
                     fn () => new AppConfig(
                         twixRoot: realpath(__DIR__),
                         root: realpath($rootDir),
-                        env: env('ENVIRONMENT', 'dev'),
-                        appDir: env('APPDIR', 'app'),
+                        env: env('ENVIRONMENT', $options['env']),
+                        appDir: env('APPDIR', $options['appDir']),
                         threadId: Uuid::uuid4()->toString()
                     )
                 )
@@ -64,6 +64,18 @@ final class Twix
         $container->singleton(
             classname: Application::class,
             definition: fn () => new HttpApplication($container, $container->get(EventBus::class))
+        );
+
+        return $container->get(Application::class);
+    }
+
+    public function minimal(): MinimalApplication
+    {
+        $container = $this->getKernel()->init();
+
+        $container->singleton(
+            classname: Application::class,
+            definition: fn () => new MinimalApplication($container, $container->get(EventBus::class))
         );
 
         return $container->get(Application::class);

@@ -40,13 +40,17 @@ class TwixContainerTest extends TestCase
         $this->assertInstanceOf(ThingB::class, $instance);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @throws ContainerException
+     */
     public function testContainerWithUndefinedDependencies()
     {
         $container = new TwixContainer();
 
         $this->expectException(ContainerException::class);
         $this->expectExceptionMessage("Cannot Autowire Twix\Test\Container\ThingC:: Dependency [subThing1] has no class type definition.");
+
         $container->get(ThingC::class);
     }
 

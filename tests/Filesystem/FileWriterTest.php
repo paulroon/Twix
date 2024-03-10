@@ -2,21 +2,31 @@
 
 namespace Twix\Test\Filesystem;
 
+use Twix\Twix;
+use Twix\Application\AppConfig;
 use Twix\Filesystem\FileWriter;
 use Twix\Test\TestCase;
 
 class FileWriterTest extends TestCase
 {
-    private const TEST_PATH = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+    private const TEST_PATH = __DIR__ . DIRECTORY_SEPARATOR;
     private const TEST_FILENAME = 'test_file.txt';
+
+    private FileWriter $writer;
+    private string $filePath;
 
     public function setUp(): void
     {
-        if (! file_exists(self::TEST_PATH)) {
-            mkdir(self::TEST_PATH, 0777, true);
+        parent::setup();
+        $dirPath = realpath(self::TEST_PATH);
+        $this->filePath = sprintf("%s%s%s", $dirPath, DIRECTORY_SEPARATOR, self::TEST_FILENAME);
+        if (! file_exists($dirPath)) {
+            mkdir($dirPath, 0777, true);
         }
+        file_put_contents($this->filePath, '');
 
-        file_put_contents(self::TEST_PATH . self::TEST_FILENAME, '');
+        $appConfig = $this->get(AppConfig::class);
+        $this->writer = (new FileWriter($appConfig))->setFileName($this->filePath);
     }
 
     protected function tearDown(): void
@@ -26,24 +36,28 @@ class FileWriterTest extends TestCase
         }
     }
 
+    public function testFileNameIsSet()
+    {
+        $this->assertEquals($this->writer->getFileName(), $this->filePath);
+    }
+
     public function testWrite()
     {
-        $writer = new FileWriter(self::TEST_PATH, self::TEST_FILENAME);
+
         $text = 'Oh Hello!' . PHP_EOL;
-        $bytesWritten = $writer->write($text);
+        $bytesWritten = $this->writer->write($text);
 
         $this->assertEquals(strlen($text), $bytesWritten);
 
-        $this->assertEquals($text, file_get_contents(self::TEST_PATH . self::TEST_FILENAME));
+        $this->assertEquals($text, file_get_contents($this->filePath));
     }
 
     public function testLastBytesWrittenCount()
     {
-        $writer = new FileWriter(self::TEST_PATH, self::TEST_FILENAME);
         $text = 'Oh Hello!' . PHP_EOL;
-        $writer->write($text);
+        $this->writer->write($text);
 
-        $this->assertEquals(strlen($text), $writer->getLastWriteBytes());
+        $this->assertEquals(strlen($text), $this->writer->getLastWriteBytes());
     }
 
     public function testAppend()
@@ -51,9 +65,8 @@ class FileWriterTest extends TestCase
         $initialText = "Initial content\n";
         file_put_contents(self::TEST_PATH . self::TEST_FILENAME, $initialText);
 
-        $writer = new FileWriter(self::TEST_PATH, self::TEST_FILENAME);
         $appendedText = "Appended content\n";
-        $bytesAppended = $writer->append($appendedText);
+        $bytesAppended = $this->writer->append($appendedText);
 
         $this->assertEquals(strlen($appendedText), $bytesAppended);
 

@@ -1,0 +1,84 @@
+1710064466 8b72d9a5-336a-45a8-84d4-392985c535f5 DEBUG      Bootstrapping Application                                             f5a17853-d719-4d58-8b70-9e0dde065c4b
+1710064466 8b72d9a5-336a-45a8-84d4-392985c535f5 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            7a92a36a-e975-453b-9c10-0b8c295dddfa
+1710064466 8b72d9a5-336a-45a8-84d4-392985c535f5 INFO       GET / []                                                              1e6b7507-bd97-46f0-9cfa-eaf9fc36c029
+1710064466 8b72d9a5-336a-45a8-84d4-392985c535f5 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      95ec4a11-ee64-4200-84cf-30e6dc0bb1aa
+1710064466 8b72d9a5-336a-45a8-84d4-392985c535f5 DEBUG      Twix\Events\HttpLifecycle::handleErrorResponseEvent[HttpErrorResponse]cb2a3ed2-4d56-4fc5-84b6-7791ddb7642f
+1710064466 8b72d9a5-336a-45a8-84d4-392985c535f5 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   8a09a74f-569b-4cf1-9ae0-f8da5ce2e2ed
+1710064466 0f3392ae-c860-4606-b9ae-5de2734bf1ca DEBUG      Bootstrapping Application                                             6fe27d57-6f62-4c34-a2b9-486f47f9bafc
+1710064466 0f3392ae-c860-4606-b9ae-5de2734bf1ca DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            250f23e1-3885-4175-839f-33b5b565d6b7
+1710064466 0f3392ae-c860-4606-b9ae-5de2734bf1ca INFO       GET /favicon.ico []                                                   84b30067-1429-4486-9c9f-40fa551e04ad
+1710064466 0f3392ae-c860-4606-b9ae-5de2734bf1ca DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      fa32b7c6-e5a7-43f3-94c2-1a6c0261b40d
+1710064466 0f3392ae-c860-4606-b9ae-5de2734bf1ca DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          1dfa3302-bdfb-4590-84d3-8c1874344520
+1710064466 0f3392ae-c860-4606-b9ae-5de2734bf1ca DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   c5daee3c-4f99-49ae-8907-f3a003c3a8b9
+1710064491 69a792c7-a13b-4d76-a302-deb56dd45b42 DEBUG      Bootstrapping Application                                             c0609761-f68b-45be-a558-d6cdaed68377
+1710064491 69a792c7-a13b-4d76-a302-deb56dd45b42 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            534cb88d-1a57-4c77-9d5b-b3d5271c443b
+1710064491 69a792c7-a13b-4d76-a302-deb56dd45b42 INFO       GET / []                                                              01e39cc8-a1fc-4a46-92ca-206785256f5b
+1710064491 69a792c7-a13b-4d76-a302-deb56dd45b42 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      b8a08882-8a33-4b47-a7c4-6dfed441fb5e
+1710064491 69a792c7-a13b-4d76-a302-deb56dd45b42 DEBUG      Twix\Events\HttpLifecycle::handleErrorResponseEvent[HttpErrorResponse]a9875051-2ae7-45e3-b19d-328d53852819
+1710064491 69a792c7-a13b-4d76-a302-deb56dd45b42 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   dcf1cd4a-0507-4834-bebb-6a571939260f
+1710064493 56e126ef-8320-4fe9-9286-711bec2e3ff8 DEBUG      Bootstrapping Application                                             22c31138-447f-484a-ba6f-33f4e2e0e720
+1710064493 56e126ef-8320-4fe9-9286-711bec2e3ff8 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            79fb4cf8-8d9b-4ec3-b6f4-a3ddc218a130
+1710064493 56e126ef-8320-4fe9-9286-711bec2e3ff8 INFO       GET / []                                                              1d2a3bd7-1c09-4297-97dc-a40c3d1deb3c
+1710064493 56e126ef-8320-4fe9-9286-711bec2e3ff8 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      0d881b2b-b60f-40b7-bc72-041ba1b19f4a
+1710064493 56e126ef-8320-4fe9-9286-711bec2e3ff8 DEBUG      Twix\Events\HttpLifecycle::handleErrorResponseEvent[HttpErrorResponse]c0e3606b-9482-4b3a-9d15-71a06d940d0b
+1710064493 56e126ef-8320-4fe9-9286-711bec2e3ff8 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   e4370a8c-e1e1-4ac7-92eb-e2bed1bf437e
+1710064494 5d547456-472f-4a4e-baaf-b3fdbc71081a DEBUG      Bootstrapping Application                                             4e39f637-c30e-45da-aada-a490fe704e58
+1710064494 5d547456-472f-4a4e-baaf-b3fdbc71081a DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            9908f94b-19f3-4574-acce-5b88338953f0
+1710064494 5d547456-472f-4a4e-baaf-b3fdbc71081a INFO       GET / []                                                              5c78042f-d5b1-4b95-b7aa-bcf23ac3e135
+1710064494 5d547456-472f-4a4e-baaf-b3fdbc71081a DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      83c39798-99ca-4600-9b56-c15808d87fa6
+1710064494 5d547456-472f-4a4e-baaf-b3fdbc71081a DEBUG      Twix\Events\HttpLifecycle::handleErrorResponseEvent[HttpErrorResponse]f272d835-f5e9-4aa9-999e-072eae917c0c
+1710064494 5d547456-472f-4a4e-baaf-b3fdbc71081a DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   5a5a93dc-f297-4500-87a5-e5cd26f8570e
+1710064547 19c6ed7f-2e17-4232-b3a5-13af88399e08 DEBUG      Bootstrapping Application                                             3582838b-d325-463b-a03b-3f946c5b9d80
+1710064547 19c6ed7f-2e17-4232-b3a5-13af88399e08 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            f8df261d-0218-447c-9368-10f7393e5c21
+1710064547 19c6ed7f-2e17-4232-b3a5-13af88399e08 INFO       GET / []                                                              c81d8c0b-a2cd-4eef-9020-aef467e56b6f
+1710064547 19c6ed7f-2e17-4232-b3a5-13af88399e08 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      c805b441-f444-420e-8b94-5ff17a2597c6
+1710064547 19c6ed7f-2e17-4232-b3a5-13af88399e08 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          189eaca5-f6ac-4188-a905-47a2056183b6
+1710064547 19c6ed7f-2e17-4232-b3a5-13af88399e08 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   dfc5573c-6ebe-4846-bbac-ef9b63f50a84
+1710064553 4a9cdea5-6d1e-4eb4-bb8d-4d97cbfec1c6 DEBUG      Bootstrapping Application                                             3ffdb375-e3b0-4aef-b507-3cf42f8028bb
+1710064553 4a9cdea5-6d1e-4eb4-bb8d-4d97cbfec1c6 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            96e928c9-8164-42a8-8475-79630b6b0cda
+1710064553 4a9cdea5-6d1e-4eb4-bb8d-4d97cbfec1c6 INFO       GET / []                                                              e8aa6b30-efca-4c43-a8fb-33226c695773
+1710064553 4a9cdea5-6d1e-4eb4-bb8d-4d97cbfec1c6 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      46b6b4a2-ba6c-456b-a212-79069c116863
+1710064553 4a9cdea5-6d1e-4eb4-bb8d-4d97cbfec1c6 DEBUG      Twix\Events\HttpLifecycle::handleErrorResponseEvent[HttpErrorResponse]1d1eaaab-ed20-4a56-b5bf-cdca72046314
+1710064553 4a9cdea5-6d1e-4eb4-bb8d-4d97cbfec1c6 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   63545cfa-da40-406e-8791-5e608ecc6032
+1710064676 4adc5235-927a-4f66-a717-d7a4add258f6 DEBUG      Bootstrapping Application                                             2f6ad3f0-5a08-4214-8f36-8ed47522c486
+1710064676 4adc5235-927a-4f66-a717-d7a4add258f6 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            ddedc6df-af90-4e93-af9a-405e01d6bb57
+1710064676 4adc5235-927a-4f66-a717-d7a4add258f6 INFO       GET / []                                                              195f4ce0-92bb-48bd-8a5f-33acb75e922a
+1710064676 4adc5235-927a-4f66-a717-d7a4add258f6 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      4cb15365-1667-486b-babb-0d9390cd4807
+1710064676 4adc5235-927a-4f66-a717-d7a4add258f6 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          4b9935ef-1349-48e9-bbab-8e2277067854
+1710064676 4adc5235-927a-4f66-a717-d7a4add258f6 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   f8572efb-0386-4eb9-864a-b3b917469fe2
+1710064677 c3094270-8339-4c63-9bd5-f01ea0a10794 DEBUG      Bootstrapping Application                                             18dd89b4-f514-41ec-8964-d3f41d90b7cc
+1710064677 c3094270-8339-4c63-9bd5-f01ea0a10794 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            75717aa0-b6d1-4d35-9ee5-4e5c23237a4b
+1710064677 c3094270-8339-4c63-9bd5-f01ea0a10794 INFO       GET / []                                                              fabe1a7e-487d-40e6-ad65-305f05a52856
+1710064677 c3094270-8339-4c63-9bd5-f01ea0a10794 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      26278374-e22a-4ee1-b741-089870c24cb4
+1710064677 c3094270-8339-4c63-9bd5-f01ea0a10794 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          12babaaf-5c9e-4e72-aaa5-20481095ddea
+1710064677 c3094270-8339-4c63-9bd5-f01ea0a10794 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   01538eb1-ae03-4042-87de-98b02ff2ea22
+1710064678 2b527bd7-0cec-406c-a64a-06d6b39ba408 DEBUG      Bootstrapping Application                                             21ceccb7-7928-471a-8445-415323bdcba0
+1710064678 2b527bd7-0cec-406c-a64a-06d6b39ba408 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            11055104-4e70-4038-bf83-8bb87bbfa897
+1710064678 2b527bd7-0cec-406c-a64a-06d6b39ba408 INFO       GET / []                                                              2298e7fc-492e-487f-90f2-397fc29201ff
+1710064678 2b527bd7-0cec-406c-a64a-06d6b39ba408 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      7ac280a0-c492-4511-ac8a-004e8040231c
+1710064678 2b527bd7-0cec-406c-a64a-06d6b39ba408 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          832a6142-bfb8-4722-b5b5-e6d5209b1eca
+1710064678 2b527bd7-0cec-406c-a64a-06d6b39ba408 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   91eea1ff-1df2-4790-ac45-05b5a2ae357e
+1710064678 534efff3-5c8e-4de2-86a5-3511e22fd57d DEBUG      Bootstrapping Application                                             b651f574-4f79-4361-a287-472efc9c9a0a
+1710064678 534efff3-5c8e-4de2-86a5-3511e22fd57d DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            f34f958f-ccb7-4808-98e5-a66d149b948f
+1710064678 534efff3-5c8e-4de2-86a5-3511e22fd57d INFO       GET / []                                                              85464b76-6773-4fd1-a1ba-6eaaa0c5da61
+1710064678 534efff3-5c8e-4de2-86a5-3511e22fd57d DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      ac085b76-502b-4860-9f2f-aa629cc80a77
+1710064678 534efff3-5c8e-4de2-86a5-3511e22fd57d DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          52b09a9d-6b9a-4aa6-b7d0-04cfea35b9fd
+1710064678 534efff3-5c8e-4de2-86a5-3511e22fd57d DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   b08da8d1-c084-4f77-9935-67af8a97b187
+1710064721 de624c77-afb5-4def-b578-018abe85b9d2 DEBUG      Bootstrapping Application                                             9e02d4c5-446e-46b6-b83c-ad03ab16f193
+1710064721 de624c77-afb5-4def-b578-018abe85b9d2 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            ae4f0cee-26ef-494e-bc57-0dd4aabb63aa
+1710064721 de624c77-afb5-4def-b578-018abe85b9d2 INFO       GET / []                                                              d10505ca-d12e-4006-9270-624d158ff111
+1710064721 de624c77-afb5-4def-b578-018abe85b9d2 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      27b9a8aa-0009-4548-9f6b-f331b306181f
+1710064721 de624c77-afb5-4def-b578-018abe85b9d2 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          f5b18f02-d9fc-4a8a-b409-2214e2a4ba02
+1710064721 de624c77-afb5-4def-b578-018abe85b9d2 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   d51bd4a0-1ec2-4f96-8395-3b5f01697e98
+1710064723 1e47ae71-91e5-44c5-a725-5354e523f845 DEBUG      Bootstrapping Application                                             1600d3c8-c3ac-4d4f-8f5d-d9f004e59224
+1710064723 1e47ae71-91e5-44c5-a725-5354e523f845 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            fcdc156f-cbed-4767-99ca-ec6531fb6a7f
+1710064723 1e47ae71-91e5-44c5-a725-5354e523f845 INFO       GET / []                                                              399f31d2-3040-4fc8-ad70-7ff0b58f56cd
+1710064723 1e47ae71-91e5-44c5-a725-5354e523f845 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      0fd34fd0-84a6-45a8-83cf-d0f9d5500a38
+1710064723 1e47ae71-91e5-44c5-a725-5354e523f845 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          0f9679e5-bb04-4db6-a5e6-cae25834124f
+1710064723 1e47ae71-91e5-44c5-a725-5354e523f845 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   134dadf3-e278-4d2f-8b51-0359b67506b4
+1710064783 a5657b39-6b0c-4426-9e67-4810a11a2423 DEBUG      Bootstrapping Application                                             cd3c45cd-ec12-4e29-8419-8b3399c86c1b
+1710064783 a5657b39-6b0c-4426-9e67-4810a11a2423 DEBUG      Twix\Events\HttpLifecycle::handleRequest[HttpRequestEvent]            91b83947-26bb-4cc9-b09e-3882e02988e7
+1710064783 a5657b39-6b0c-4426-9e67-4810a11a2423 INFO       GET / []                                                              0eb1c1fb-9a53-40e6-85b0-a322f542ea96
+1710064783 a5657b39-6b0c-4426-9e67-4810a11a2423 DEBUG      Twix\Events\HttpLifecycle::handleController[HttpControllerEvent]      0cf22eab-3435-4ae1-9685-6938ea1f74a4
+1710064783 a5657b39-6b0c-4426-9e67-4810a11a2423 DEBUG      Twix\Events\HttpLifecycle::handleResponse[HttpResponseEvent]          9257a03b-c82f-4eb6-bd21-9cf5ecdb63aa
+1710064783 a5657b39-6b0c-4426-9e67-4810a11a2423 DEBUG      Twix\Events\HttpLifecycle::handleResponderEvent[HttpResponderEvent]   57aa7a45-7480-473b-802a-57add079502d

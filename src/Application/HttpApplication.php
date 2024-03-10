@@ -51,8 +51,5 @@ final readonly class HttpApplication implements Application
 
         // Run Http Responder
         $this->eventBus->dispatch(new HttpResponderEvent());
-
-        // Run Http Responder
-        $this->eventBus->dispatch(new HttpResponderEvent());
     }
 }
