@@ -8,6 +8,7 @@ use Twix\Events\Handler;
 use Twix\Events\HttpErrorResponseEvent;
 use Twix\Events\LogEvent;
 use Twix\Filesystem\FileWriter;
+use Twix\Http\HttpConnectionConfig;
 use Twix\Http\HttpResponse;
 use Twix\Http\Status;
 use Twix\Interfaces\Logger;
@@ -26,10 +27,15 @@ final readonly class Bootstrap
     #[Handler(ApplicationBootEvent::class)]
     public function bootstrap(): void
     {
-        Twix::getContainer()->singleton(
-            FileWriter::class,
-            fn () => new FileWriter($this->appConfig)
-        );
+        $container = Twix::getContainer();
+        $container
+            ->singleton(
+                FileWriter::class,
+                fn () => new FileWriter($this->appConfig)
+            )
+            ->register(JsonPlaceHolderClient::class, fn () => new JsonPlaceHolderClient(new HttpConnectionConfig([
+                'url' => 'https://jsonplaceholder.typicode.com',
+            ])));
         $this->logger->debug('Bootstrapping Application');
 
     }
