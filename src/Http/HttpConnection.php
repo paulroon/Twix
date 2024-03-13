@@ -14,7 +14,6 @@ readonly class HttpConnection implements Connection
     }
 
     /**
-     * @throws \JsonException
      * @throws Exception
      */
     public function getJson(string $urlPath, $headers = []): array

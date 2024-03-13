@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Clients\JsonPlaceHolderClient;
 use Twix\Application\AppConfig;
 use Twix\Events\ApplicationBootEvent;
 use Twix\Events\Handler;

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App;
 
-use App\JsonPlaceHolderClient;
+use App\Clients\JsonPlaceHolderClient;
+use App\Events\CustomEvent;
 use Exception;
 use Twix\Application\AppConfig;
+use Twix\Events\Handler;
 use Twix\Http\Get;
 use Twix\Http\HttpResponse;
 use Twix\Http\Post;
@@ -13,13 +15,13 @@ use Twix\Interfaces\Logger;
 use Twix\Interfaces\Request;
 use Twix\Interfaces\Response;
 
-final readonly class DefaultController
+final readonly class MyApplication
 {
     public function __construct(
         private Logger $logger,
         private AppConfig $appConfig,
         private JsonPlaceHolderClient $jsonPlaceHolderClient,
-        private readonly Request $request
+        private Request $request
     ) {
     }
 
@@ -56,5 +58,11 @@ final readonly class DefaultController
         );
 
         return new HttpResponse(Status::HTTP_200, sprintf('<ul><li>%s</li></ul>', $message));
+    }
+
+    #[Handler(CustomEvent::class)]
+    public function customEventHandler(): void
+    {
+        dump('handling CustomHandlers::customEventHandler()');
     }
 }

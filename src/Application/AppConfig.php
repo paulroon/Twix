@@ -5,11 +5,11 @@ namespace Twix\Application;
 final readonly class AppConfig
 {
     public function __construct(
-        private readonly string $twixRoot,
-        private readonly string $root,
-        private readonly string $env,
-        private readonly string $appDir,
-        private readonly string $threadId,
+        private string $twixRoot,
+        private string $root,
+        private string $env,
+        private string $appDir,
+        private string $threadId,
     ) {
     }
 
