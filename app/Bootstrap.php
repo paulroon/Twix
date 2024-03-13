@@ -33,10 +33,7 @@ final readonly class Bootstrap
             ->singleton(
                 FileWriter::class,
                 fn () => new FileWriter($this->appConfig)
-            )
-            ->register(JsonPlaceHolderClient::class, fn () => new JsonPlaceHolderClient(new HttpConnectionConfig([
-                'url' => 'https://jsonplaceholder.typicode.com',
-            ])));
+            );
         $this->logger->debug('Bootstrapping Application');
 
     }

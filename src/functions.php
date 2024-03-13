@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Twix {
 
 
+    use Twix\Interfaces\Application;
+
     function env(string $key, mixed $default = null): mixed
     {
         $value = getenv($key);
@@ -24,10 +26,17 @@ namespace Twix {
 
     function runHttpApp(string $appRoot): void
     {
+        $twix = Twix::boot($appRoot);
+
+        $application = null;
         try {
-            $application = Twix::boot($appRoot)->http();
+            $application = $twix->http();
             $application->run();
         } catch (\Throwable $throwable) {
+            if ($application instanceof Application) {
+                dd($throwable);
+                die('Application did not load.');
+            }
             $application->handleError($throwable);
         }
 

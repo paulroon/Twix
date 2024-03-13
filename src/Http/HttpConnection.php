@@ -4,14 +4,13 @@ namespace Twix\Http;
 
 use Exception;
 use Twix\Interfaces\Connection;
+use Twix\Interfaces\ConnectionConfig;
 
 readonly class HttpConnection implements Connection
 {
-    private string $lastResponse;
+    private HttpConnectionConfig $config;
 
-    public function __construct(private HttpConnectionConfig $config)
-    {
-    }
+    private string $lastResponse;
 
     /**
      * @throws Exception
@@ -74,5 +73,11 @@ readonly class HttpConnection implements Connection
     public function getConfig(): HttpConnectionConfig
     {
         return $this->config;
+    }
+
+    public function setConfig(ConnectionConfig $config): self
+    {
+        $this->config = $config;
+        return $this;
     }
 }
