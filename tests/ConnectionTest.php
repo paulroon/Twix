@@ -29,7 +29,7 @@ class ConnectionTest extends TestCase
             ->method('getUrl')
             ->willReturn(self::URL);
 
-        $this->connection = new HttpConnection($httpConnectionConfig);
+        $this->connection = (new HttpConnection())->setConfig($httpConnectionConfig);
     }
 
     /** @test */
