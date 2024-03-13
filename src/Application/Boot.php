@@ -2,7 +2,6 @@
 
 namespace Twix\Application;
 
-
 use Attribute;
 
 /**

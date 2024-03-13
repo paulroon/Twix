@@ -29,6 +29,7 @@ namespace Twix {
         $twix = Twix::boot($appRoot);
 
         $application = null;
+
         try {
             $application = $twix->http();
             $application->run();

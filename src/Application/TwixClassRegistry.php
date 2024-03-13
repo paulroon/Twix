@@ -6,7 +6,6 @@ use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;
 use Twix\Filesystem\ClassFinder;
-use Twix\Logger\LogItem;
 use Twix\Twix;
 
 final class TwixClassRegistry
@@ -79,7 +78,7 @@ final class TwixClassRegistry
 
     public function getBootableClasses(): array
     {
-        return array_filter($this->classRegister, function($classData, $className) {
+        return array_filter($this->classRegister, function ($classData, $className) {
 
             /** @var ReflectionAttribute $classDataAttr */
             foreach ($classData['_attributes'] as $classDataAttr) {

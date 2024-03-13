@@ -2,14 +2,12 @@
 
 namespace App;
 
-use App\Clients\JsonPlaceHolderClient;
 use Twix\Application\AppConfig;
 use Twix\Events\ApplicationBootEvent;
 use Twix\Events\Handler;
 use Twix\Events\HttpErrorResponseEvent;
 use Twix\Events\LogEvent;
 use Twix\Filesystem\FileWriter;
-use Twix\Http\HttpConnectionConfig;
 use Twix\Http\HttpResponse;
 use Twix\Http\Status;
 use Twix\Interfaces\Logger;

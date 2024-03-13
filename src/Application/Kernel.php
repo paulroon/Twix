@@ -15,6 +15,7 @@ final readonly class Kernel
     public function init(): Container
     {
         $this->registerBootLoaders();
+
         return $this->getContainer();
     }
 

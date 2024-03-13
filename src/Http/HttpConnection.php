@@ -78,6 +78,7 @@ readonly class HttpConnection implements Connection
     public function setConfig(ConnectionConfig $config): self
     {
         $this->config = $config;
+
         return $this;
     }
 }
